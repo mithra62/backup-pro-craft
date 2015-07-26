@@ -1,0 +1,98 @@
+
+{% import "_includes/forms" as forms %}
+
+{% if enable_delete is not defined or enable_delete != 'yes' %}
+	{% for backup in _backups %}
+		<input type="hidden" name="backups[]" value="{{ backup.file_name|m62Encode|url_encode }}" />
+	{% endfor %}
+{% endif %}
+
+<table width="100%" class="data existing_backups" border="0" cellpadding="0" cellspacing="0">
+<thead>
+	<tr class="odd">
+		<th></th>
+	
+		{% if enable_delete is defined and enable_delete == 'yes' %}
+		<th></th>
+		{% endif %}	
+		<th></th>
+		<th></th>
+		<th class="">{{ "taken"|m62Lang|t }}</th>
+		{% if enable_type is defined and enable_type == 'yes' %}
+		<th class="">{{ "type"|m62Lang|t }}</th>
+		{% endif %}
+		<th class="">{{ "file_size"|m62Lang|t }}</th>
+		<th class="">{{ "time"|m62Lang|t }}</th>
+		<th>{{ "memory"|m62Lang|t }}</th>
+		{% if enable_actions is defined and enable_actions == 'yes' %}
+		<th class=""></th>
+		{% endif %}	
+	</tr>
+</thead>
+<tbody>
+{% for backup in _backups %}
+<tr class="odd">
+	<td class=" backup_pro_backup_status backup_pro_backup_warn"></td>
+	{% if enable_delete is defined and enable_delete == 'yes' %}
+	<td>
+		{{ forms.checkbox({
+		        id: backup.hash,
+		        name: 'backups[]',
+		        value: backup.file_name|m62Encode|url_encode,
+		        class: 'toggle_files'
+		    }) 
+		}}	
+	</td>
+	{% endif %}		
+	<td style="white-space: nowrap">
+	{% if backup.storage_locations is defined and backup.storage_locations %}
+		{% for location_id,storage in backup.storage_locations %}
+			<img src="{{ resourceUrl('backuppro/images/storage/'~storage.icon~'.png') }}" class="" title="{{ storage.storage_location_name }}">
+		{% endfor %}
+	{% endif %}
+	</td>
+	<td style="width:55%">
+		{% if enable_editable_note is defined and enable_editable_note == 'yes' %}
+		<div class="bp_editable" rel="{{ backup.hash }}" id="note_div_{{ backup.hash }}">{% if backup.note == '' %}Click to add note...{% else %}{{ backup.note }} {% endif %}</div>
+		<input name="note_{{ backup.hash }}" value="{{ backup.note }}" id="note_{{ backup.hash }}" data-backup-type="{{ backup.backup_type }}" class="note_container" rel="{{ backup.file_name }}" style="display:none; width:100%" type="text">
+		
+		{% else %}
+			{% if backup.note == '' %}N/A{% else %}{{ backup.note }} {% endif %}
+		{% endif %}
+	</td>
+	<td style="white-space: nowrap">
+		{{ backup.created_date|m62DateTime|raw }}
+	</td>
+	{% if enable_type is defined and enable_type == 'yes' %}
+	<td>{{ backup.backup_type|m62Lang }}</td>
+	{% endif %}
+	<td style="white-space: nowrap"><!-- {{ backup.compressed_size }} -->{{ backup.compressed_size|m62FileSize }}</td>
+	<td style="white-space: nowrap">{{ backup.time_taken|number_format(2, '.', ',') }}s</td>
+	<td style="white-space: nowrap">{{ backup.max_memory|m62FileSize }}</td>
+	{% if enable_actions is defined and enable_actions == 'yes' %}
+	<td align="right" style="width:40px; white-space: nowrap">
+		<div style="float:right">
+		{% if backup.backup_type == 'database' %}
+			{% if backup.can_restore == '1' %}
+			<a href="{{ url('backuppro/restore/confirm') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" title="{{ "restore"|m62Lang }}">
+				<img src="{{ resourceUrl('backuppro/images/restore.png') }}" alt="{{ "restore"|m62Lang }}" class="">
+			</a> 
+			{% else %}
+			<img src="{{ resourceUrl('backuppro/images/restore.png') }}" alt="{{ "restore"|m62Lang }}" class="desaturate">
+			{% endif %}
+			
+		{% endif %}
+		{% if backup.can_download == '1' %}
+		<a href="{{ url('backuppro/download') }}?id={{ backup.details_file_name|m62Encode|url_encode }}&type={{ backup.backup_type }}" title="{{ "download"|m62Lang }}">
+			<img src="{{ resourceUrl('backuppro/images/download.png') }}" alt="{{ "download"|m62Lang }}" class="">
+		</a> 
+		{% else %}
+			<img src="{{ resourceUrl('backuppro/images/download.png') }}" alt="{{ "download"|m62Lang }}" class="desaturate">
+		{% endif %}
+		</div>
+	</td>
+	{% endif %}		
+</tr>
+{% endfor %}
+</tbody>
+</table>

@@ -1,0 +1,40 @@
+{{ forms.textField({
+        label: "rcf_username"|m62Lang|t,
+        id: 'rcf_username',
+        name: 'rcf_username',
+        value: form_data.rcf_username,
+        instructions: "rcf_username_instructions"|m62Lang|t,
+        errors: form_errors.rcf_username
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "rcf_api"|m62Lang|t,
+        id: 'rcf_api',
+        name: 'rcf_api',
+        value: form_data.rcf_api,
+        instructions: "rcf_api_instructions"|m62Lang|t,
+        errors: form_errors.rcf_api
+    }) 
+}}
+
+{{ forms.textField({
+        label: "rcf_container"|m62Lang|t,
+        id: 'rcf_container',
+        name: 'rcf_container',
+        value: form_data.rcf_container,
+        instructions: "rcf_container_instructions"|m62Lang|t,
+        errors: form_errors.rcf_container
+    }) 
+}}
+
+{{ forms.selectField({
+        label: "rcf_location"|m62Lang|t,
+        id: 'rcf_location',
+        name: 'rcf_location',
+        value: form_data.rcf_location,
+        instructions: "rcf_location_instructions"|m62Lang|t,
+        options: { us:"us"|m62Lang|t, uk:"uk"|m62Lang|t },
+        errors: form_errors.rcf_location
+    }) 
+}}

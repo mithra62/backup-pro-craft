@@ -1,0 +1,13 @@
+<h2>{{ "license_details"|m62Lang|t }}</h2>
+
+<p>{{ "license_details_instructions"|m62Lang|t|raw }}</p>
+
+{{ forms.textField({
+        label: "license_number"|m62Lang|t,
+        id: 'license_number',
+        name: 'license_number',
+        value: form_data.license_number,
+        instructions: "license_number_instructions"|m62Lang|t,
+        errors: form_errors.license_number
+    }) 
+}}

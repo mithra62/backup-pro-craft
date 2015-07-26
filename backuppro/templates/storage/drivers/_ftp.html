@@ -1,0 +1,82 @@
+{{ forms.textField({
+        label: "ftp_hostname"|m62Lang|t,
+        id: 'ftp_hostname',
+        name: 'ftp_hostname',
+        value: form_data.ftp_hostname,
+        instructions: "ftp_hostname_instructions"|m62Lang|t,
+        errors: form_errors.ftp_hostname
+    }) 
+}}
+
+{{ forms.textField({
+        label: "ftp_store_location"|m62Lang|t,
+        id: 'ftp_store_location',
+        name: 'ftp_store_location',
+        value: form_data.ftp_store_location,
+        instructions: "ftp_store_location_instructions"|m62Lang|t,
+        errors: form_errors.ftp_store_location
+    }) 
+}}
+
+{{ forms.textField({
+        label: "ftp_username"|m62Lang|t,
+        id: 'ftp_username',
+        name: 'ftp_username',
+        value: form_data.ftp_username,
+        instructions: "ftp_username_instructions"|m62Lang|t,
+        errors: form_errors.ftp_username
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "ftp_password"|m62Lang|t,
+        id: 'ftp_password',
+        name: 'ftp_password',
+        value: form_data.ftp_password,
+        instructions: "ftp_password_instructions"|m62Lang|t,
+        errors: form_errors.ftp_password
+    }) 
+}}
+
+{{ forms.textField({
+        label: "ftp_port"|m62Lang|t,
+        id: 'ftp_port',
+        name: 'ftp_port',
+        value: form_data.ftp_port,
+        instructions: "ftp_port_instructions"|m62Lang|t,
+        errors: form_errors.ftp_port
+    }) 
+}}
+
+<hr />
+{{ forms.textField({
+        label: "ftp_timeout"|m62Lang|t,
+        id: 'ftp_timeout',
+        name: 'ftp_timeout',
+        value: form_data.ftp_timeout,
+        instructions: "ftp_timeout_instructions"|m62Lang|t,
+        errors: form_errors.ftp_timeout
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "ftp_passive"|m62Lang|t,
+        id: 'ftp_passive',
+        name: 'ftp_passive',
+        value: 1,
+        instructions: "ftp_passive_instructions"|m62Lang|t,
+        checked: form_data.ftp_passive,
+        errors: form_errors.ftp_passive
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "ftp_ssl"|m62Lang|t,
+        id: 'ftp_ssl',
+        name: 'ftp_ssl',
+        value: 1,
+        instructions: "ftp_ssl_instructions"|m62Lang|t,
+        checked: form_data.ftp_ssl,
+        errors: form_errors.ftp_ssl
+    }) 
+}}

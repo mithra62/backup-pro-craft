@@ -1,0 +1,36 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "settings" %}
+{% set selSidebar = "storage" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "settings"|m62Lang|t, url: url('backuppro/settings/general') },
+	{ label: "storage_location_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings/storage') }
+] %}
+
+
+{% set sidebar %}
+	{% include 'backuppro/storage/_new_button' %}
+	{% include 'backuppro/settings/_sidebar' %}
+{% endset %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	<h2>{{ "add_storage_location"|m62Lang|t }} ({{ storage_engine.name|m62Lang|t }})</h2>
+	
+	<p>{{ storage_engine.desc|m62Lang|t }}</p>
+	
+	
+	<form name="update_settings" action="" method="post" accept-charset="UTF-8" />
+	{% include 'backuppro/storage/_form' %}
+		<div class="buttons">
+			<input type="submit" value="{{ "add_storage_location"|m62Lang|t }}" class="btn submit" >
+		</div>
+	</form>
+{% endblock %}
+
+

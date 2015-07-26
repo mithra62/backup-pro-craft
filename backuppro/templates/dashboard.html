@@ -1,0 +1,132 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "dashboard" %}
+{% set selSidebar = "dashboard" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "dashboard"|m62Lang|t, url: url('backuppro') }
+] %}
+
+{% set sidebar %}
+	{% include 'backuppro/_includes/_dashboard_sidebar' %}
+{% endset %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	
+	<table border="0" cellspacing="0" cellpadding="0" class="data "  width="100%" >
+	<thead>
+	<tr>
+		<th>{{ "total_backups"|m62Lang|t }}</th>
+		<th>{{ "total_space_used"|m62Lang|t }}</th>
+		<th>{{ "total_space_available"|m62Lang|t }}</th>
+		<th align='right'>{{ "last_backup_taken"|m62Lang|t }}</th>
+		<th align='right'>{{ "first_backup_taken"|m62Lang|t }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td width='80'> {{ backup_meta.global.total_backups }} </td>
+		<td width='150'>{{ backup_meta.global.total_space_used }}</td>
+		<td>
+			{% if settings.auto_threshold == '0' %} 
+				{{ "unlimited"|m62Lang|t }}
+			{% else %}
+				{{ available_space.available_space }}
+			{% endif %}
+		</td>
+		<td align='right' width='150'>
+			{% if backup_meta.global.newest_backup_taken != ''  %}
+				{{ backup_meta.global.newest_backup_taken|m62DateTime|raw }}
+			{% else %}
+				{{ "na"|m62Lang|t }}
+			{% endif %}
+		</td>
+		<td align='right' width='150'>
+			{% if backup_meta.global.oldest_backup_taken != ''  %}
+				{{ backup_meta.global.oldest_backup_taken|m62DateTime|raw }}
+			{% else %}
+				{{ "na"|m62Lang|t }}
+			{% endif %}
+		</td>
+	</tr>
+	</tbody>
+	</table>
+	
+	
+	<table width="100%" class="data ">
+		<tbody><tr class="even">
+			<td width="50%">
+				<table class="mainTable"  width="100%" border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr class="odd">
+							<th width="50%">{{ "database_backups"|m62Lang|t }}</th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr class="even">
+						<td><strong>{{ "total_backups"|m62Lang|t }}</strong></td>
+						<td>{{ backup_meta.database.total_backups }}</td>
+					</tr>
+					<tr class="odd">
+						<td><strong>{{ "total_space_used"|m62Lang|t }}</strong></td>
+						<td>{{ backup_meta.database.total_space_used }}</td>
+					</tr>
+					<tr class="even">
+						<td><strong>{{ "last_backup_taken"|m62Lang|t }}</strong></td>
+						<td>
+							{% if backup_meta.database.newest_backup_taken != ''  %}
+								{{ backup_meta.database.newest_backup_taken|m62DateTime|raw }}
+							{% else %}
+								{{ "na"|m62Lang|t }}
+							{% endif %}
+						</td>
+					</tr>
+					</tbody>
+				</table>		
+			</td>
+			<td valign="top">
+				<table class="mainTable"  width="100%" border="0" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr class="odd">
+							<th width="50%">{{ "file_backups"|m62Lang|t }}</th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="even">
+						<td><strong>{{ "total_backups"|m62Lang|t }}</strong></td>
+							<td>{{ backup_meta.files.total_backups }}</td>
+						</tr>
+					<tr class="odd">
+						<td><strong>{{ "total_space_used"|m62Lang|t }}</strong></td>
+						<td>{{ backup_meta.files.total_space_used }}</td>
+					<tr class="even">
+						<td><strong>{{ "last_backup_taken"|m62Lang|t }}</strong></td>
+						<td>
+							{% if backup_meta.files.newest_backup_taken != ''  %}
+								{{ backup_meta.files.newest_backup_taken|m62DateTime|raw }}
+							{% else %}
+								{{ "na"|m62Lang|t }}
+							{% endif %}
+						</td>
+					</tr>
+				</tbody>
+				</table>		
+			</td>
+		</tr>
+	</tbody>
+	</table>
+
+	<h3>{{ "recent_backups"|m62Lang|t }} ( {{ backups|length }} )</h3>
+	
+	{% if backups|length == '0' %}
+		{{ "no_backups_exist"|m62Lang|t }} <a href="{{ url('backuppro/backup/db') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
+	{% else %}
+		{% include 'backuppro/_includes/_backup_table' with {'enable_type': 'yes', '_backups': backups, 'enable_delete':'no', 'enable_editable_note':'yes', 'enable_actions':'yes' } %}
+	{% endif %}
+	
+{% endblock %}

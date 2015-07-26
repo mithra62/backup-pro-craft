@@ -1,0 +1,34 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "dashboard" %}
+{% set selSidebar = "delete" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "dashboard"|m62Lang|t, url: url('backuppro') }
+] %}
+
+{% set sidebar %}
+	{% include 'backuppro/_includes/_dashboard_sidebar' %}
+{% endset %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+
+	<h3>{{ "delete_backup"|m62Lang|t }} ( {{ backups|length }} )</h3>
+	
+	<p>{{ "delete_backup_confirm"|m62Lang|t }}</p>
+	<p class="notice">{{ "action_can_not_be_undone"|m62Lang|t }}</p>
+	<form name="update_settings" action="{{ url('backuppro/delete/backups') }}" method="post" accept-charset="UTF-8" />
+		{{ getCsrfInput() }}
+		<input type="hidden" value="{{ backup_type }}" name="type" />
+		
+		{% include 'backuppro/_includes/_backup_table' with {'enable_type': 'yes', '_backups': backups, '_enable_delete':'no' } %}
+	
+		<div class="buttons right">
+			<input type="submit" value="{{ "delete"|m62Lang|t }}" class="btn submit" >
+		</div>
+		
+	</form>	
+{% endblock %}

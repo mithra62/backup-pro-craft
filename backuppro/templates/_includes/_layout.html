@@ -1,0 +1,18 @@
+{% extends "_layouts/cp" %}
+
+{% set tabs = {
+	dashboard: { label: "dashboard"|m62Lang|t, url: url('backuppro') },
+	backup_db: { label: "backup_db"|m62Lang|t, url: url('backuppro/backup?type=database') },
+	backup_files: { label: "backup_files"|m62Lang|t, url: url('backuppro/backup?type=files') },
+	settings: { label: "settings"|m62Lang|t, url: url('backuppro/settings') }
+} %}
+
+{% includeCssResource "backuppro/css/craft/backup_pro.css" %}
+{% includeCssResource "backuppro/css/chosen.css" %}
+
+{% includeJsResource "backuppro/js/chosen.jquery.js" %}
+{% includeJsResource "backuppro/js/global.js" %}
+{% includeJsResource "backuppro/js/dashboard.js" %}
+{% includeJsResource "backuppro/js/backup.js" %}
+{% includeJsResource "backuppro/js/settings.js" %}
+{% includeJsResource "backuppro/js/craft/backup_pro.js" %}

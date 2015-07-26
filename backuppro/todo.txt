@@ -1,0 +1,8 @@
+To Do:
+Backup Progress
+SSH Remote
+SFTP Remote
+Integrity Agent
+
+Bugs:
+Storage Removal has errors

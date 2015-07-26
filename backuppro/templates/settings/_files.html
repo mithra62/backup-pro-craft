@@ -1,0 +1,41 @@
+<h2>{{ "config_files"|m62Lang|t }}</h2>
+
+{{ forms.textField({
+        label: "max_file_backups"|m62Lang|t,
+        id: 'max_file_backups',
+        name: 'max_file_backups',
+        value: form_data.max_file_backups,
+        instructions: "max_file_backups_instructions"|m62Lang|t,
+        errors: form_errors.max_file_backups
+    }) 
+}}
+
+{{ forms.textField({
+        label: "file_backup_alert_threshold"|m62Lang|t,
+        id: 'file_backup_alert_threshold',
+        name: 'file_backup_alert_threshold',
+        value: form_data.file_backup_alert_threshold,
+        instructions: "file_backup_alert_threshold_instructions"|m62Lang|t,
+        errors: form_errors.file_backup_alert_threshold
+    }) 
+}}
+
+{{ forms.textareaField({
+        label: "backup_file_location"|m62Lang|t,
+        id: 'backup_file_location',
+        name: 'backup_file_location',
+        value: form_data.backup_file_location,
+        instructions: "backup_file_location_instructions"|m62Lang|t,
+        errors: form_errors.backup_file_location
+    }) 
+}}
+
+{{ forms.textareaField({
+        label: "exclude_paths"|m62Lang|t,
+        id: 'exclude_paths',
+        name: 'exclude_paths',
+        value: form_data.exclude_paths,
+        instructions: "exclude_paths_instructions"|m62Lang|t,
+        errors: form_errors.exclude_paths
+    }) 
+}}

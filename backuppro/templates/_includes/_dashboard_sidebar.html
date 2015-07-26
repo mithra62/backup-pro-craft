@@ -1,0 +1,7 @@
+<nav>
+	<ul id="groups">
+		<li><a href="{{ url('backuppro') }}"{% if selSidebar == 'dashboard' %} class="sel"{% endif %}>{{ "dashboard"|m62Lang|t }}</a></li>
+		<li><a href="{{ url('backuppro/database_backups') }}"{% if selSidebar == 'database_backups' %} class="sel"{% endif %}>{{ "database_backups"|m62Lang|t }}</a></li>
+		<li><a href="{{ url('backuppro/file_backups') }}"{% if selSidebar == 'file_backups' %} class="sel"{% endif %}>{{ "file_backups"|m62Lang|t }}</a></li>
+	</ul>
+</nav>

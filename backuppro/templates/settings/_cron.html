@@ -1,0 +1,72 @@
+<h2>{{ "configure_cron"|m62Lang|t }}</h2>
+<table class="mainTable" border="0" cellspacing="0" cellpadding="0">
+<thead>
+	<tr>
+		<th width='50%'>{{ "backup_type"|m62Lang|t }}</th>
+		<th width='30%'>{{ "cron_commands"|m62Lang|t }}</th>
+		<th width='20%'>{{ "test"|m62Lang|t }}</th>
+	</tr>
+</thead>
+<tbody>
+{% for key, cron in backup_cron_commands %}
+<tr class="even">
+	<td width='50%' style="width:50%;">{{ key|m62Lang|t }}</td>
+	<td style="width:50%;">
+		<div class="select_all">{{ cron.cmd }}</div>
+	</td>
+	<td style="width:50%;">
+		{% if cron.type == 'curl' %}
+		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}">
+			<img src="{{ resourceUrl('backuppro/images/test.png') }}" />
+		</a> <img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_{{ key }}" style="display:none" />
+		
+		{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+<hr />
+<h2>{{ "configure_cron_notification"|m62Lang|t }}</h2>
+
+{{ forms.textareaField({
+        label: "cron_notify_emails"|m62Lang|t,
+        id: 'cron_notify_emails',
+        name: 'cron_notify_emails',
+        value: form_data.cron_notify_emails,
+        instructions: "cron_notify_emails_instructions"|m62Lang|t,
+        errors: form_errors.cron_notify_emails
+    }) 
+}}
+
+{{ forms.selectField({
+        label: "cron_notify_email_mailtype"|m62Lang|t,
+        id: 'cron_notify_email_mailtype',
+        name: 'cron_notify_email_mailtype',
+        value: form_data.cron_notify_email_mailtype,
+        instructions: "cron_notify_email_mailtype_instructions"|m62Lang|t,
+        options: { html:"html"|m62Lang|t, text:"text"|m62Lang|t },
+        errors: form_errors.cron_notify_email_mailtype
+    }) 
+}}
+
+{{ forms.textField({
+        label: "cron_notify_email_subject"|m62Lang|t,
+        id: 'cron_notify_email_subject',
+        name: 'cron_notify_email_subject',
+        value: form_data.cron_notify_email_subject,
+        instructions: "cron_notify_email_subject_instructions"|m62Lang|t,
+        errors: form_errors.cron_notify_email_subject
+    }) 
+}}
+
+{{ forms.textareaField({
+        label: "cron_notify_email_message"|m62Lang|t,
+        id: 'cron_notify_email_message',
+        name: 'cron_notify_email_message',
+        value: form_data.cron_notify_email_message,
+        instructions: "cron_notify_email_message_instructions"|m62Lang|t,
+        errors: form_errors.cron_notify_email_message
+    }) 
+}}

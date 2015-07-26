@@ -1,0 +1,76 @@
+<h2>General Settings</h2>
+
+{{ forms.textField({
+        label: "working_directory"|m62Lang|t,
+        id: 'working_directory',
+        name: 'working_directory',
+        value: form_data.working_directory,
+        instructions: "working_directory_instructions"|m62Lang|t,
+        errors: form_errors.working_directory
+    }) 
+}}
+
+{{ forms.textField({
+        label: "dashboard_recent_total"|m62Lang|t,
+        id: 'dashboard_recent_total',
+        name: 'dashboard_recent_total',
+        value: form_data.dashboard_recent_total,
+        instructions: "dashboard_recent_total_instructions"|m62Lang|t,
+        errors: form_errors.dashboard_recent_total
+    }) 
+}}
+
+{{ forms.selectField({
+        label: "auto_threshold"|m62Lang|t,
+        id: 'auto_threshold',
+        name: 'auto_threshold',
+        value: form_data.auto_threshold,
+        instructions: "auto_threshold_instructions"|m62Lang|t,
+        options: threshold_options,
+        errors: form_errors.auto_threshold
+    }) 
+}}
+
+<div id="auto_threshold_custom_wrap" style="display:none;">
+	{{ forms.textField({
+	        label: "auto_threshold_custom"|m62Lang|t,
+	        id: 'auto_threshold_custom',
+	        name: 'auto_threshold_custom',
+	        value: form_data.auto_threshold_custom,
+	        instructions: "auto_threshold_custom_instructions"|m62Lang|t,
+	        errors: form_errors.auto_threshold_custom
+	    }) 
+	}}
+</div>
+
+{{ forms.checkboxField({
+        label: "allow_duplicates"|m62Lang|t,
+        id: 'allow_duplicates',
+        name: 'allow_duplicates',
+        value: 1,
+        instructions: "allow_duplicates_instructions"|m62Lang|t,
+        checked: form_data.allow_duplicates,
+        errors: form_errors.allow_duplicates
+    }) 
+}}
+
+{{ forms.textField({
+        label: "date_format"|m62Lang|t,
+        id: 'date_format',
+        name: 'date_format',
+        value: form_data.date_format,
+        instructions: "date_format_instructions"|m62Lang|t,
+        errors: form_errors.date_format
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "relative_time"|m62Lang|t,
+        id: 'relative_time',
+        name: 'relative_time',
+        value: 1,
+        instructions: "relative_time_instructions"|m62Lang|t,
+        checked: form_data.relative_time,
+        errors: form_errors.relative_time
+    }) 
+}}

@@ -1,0 +1,61 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "settings" %}
+{% set selSidebar = "storage" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "settings"|m62Lang|t, url: url('backuppro/settings/general') },
+	{ label: "storage_location_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings/storage') }
+] %}
+
+
+{% set sidebar %}
+	{% include 'backuppro/storage/_new_button' %}
+	{% include 'backuppro/settings/_sidebar' %}
+{% endset %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	
+	<h2>{{ "existing_storage_locations"|m62Lang|t }}</h2>
+	<table border="0" cellspacing="0" cellpadding="0" class="data "  width="100%" >
+	<thead>
+	<tr>
+		<th>{{ "storage_location_name"|m62Lang|t }}</th>
+		<th><div style="float:right">{{ "type"|m62Lang|t }}</div></th>
+		<th><div style="float:right">{{ "status"|m62Lang|t }}</div></th>
+		<th><div style="float:right">{{ "created_date"|m62Lang|t }}</div></th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	
+	{% if storage_details|length == '0' %}
+		<tr>
+			<td colspan="5">{{ "no_storage_locations_created_yet"|m62Lang|t }}</td>
+		</tr>
+	{% else %}
+		{% for key, storage in storage_details %}
+		<tr>
+			<td><a href="{{ url('backuppro/settings/storage/edit') }}?id={{ key }}">{{ storage.storage_location_name }}</a></td>
+			<td><div style="float:right"><img src="{{ resourceUrl('backuppro/images/storage/'~storage.storage_location_driver~'.png') }}" class="" title="{{ storage.storage_location_name }}"></div></td>
+			<td><div style="float:right">{% if storage.storage_location_status == '1' %}Active{% else %}Inactive{% endif %}</div></td>
+			<td><div style="float:right">{{ storage.storage_location_create_date|m62DateTime|raw }}</div></td>
+			<td><div style="float:right">
+			{% if can_remove %}
+			<a href="{{ url('backuppro/settings/storage/remove') }}?id={{ key }}" class="delete icon" title="Delete" role="button"></a>
+			{% endif %}
+			</div></td>
+		</tr>
+		{% endfor %}
+	{% endif %}
+	</tbody>
+	</table>
+	
+{% endblock %}
+
+

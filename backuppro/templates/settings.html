@@ -1,0 +1,59 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "settings" %}
+{% set selSidebar = section %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "settings"|m62Lang|t, url: url('backuppro/settings/general') }
+] %}
+
+
+{% set sidebar %}
+	{% include 'backuppro/settings/_sidebar' %}
+{% endset %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	
+	<form name="update_settings" action="" method="post" accept-charset="UTF-8" />
+	<input type="hidden" name="redirect" value="{{ craft.request.url }}" />
+		{{ getCsrfInput() }}
+		
+		{% if section == 'general' %}
+		
+			{% include 'backuppro/settings/_general' %}
+			
+		{% elseif section == 'files' %}
+		
+			{% include 'backuppro/settings/_files' %}
+			
+		{% elseif section == 'db' %}
+		
+			{% include 'backuppro/settings/_db' %}
+			
+		{% elseif section == 'cron' %}
+		
+			{% include 'backuppro/settings/_cron' %}
+			
+		{% elseif section == 'ia' %}
+		
+			{% include 'backuppro/settings/_ia' %}
+
+		{% elseif section == 'license' %}
+		
+			{% include 'backuppro/settings/_license' %}
+			
+		{% endif %}
+		
+		<div class="buttons">
+			<input type="submit" value="{{ "update_settings"|m62Lang|t }}" class="btn submit" >
+		</div>
+	</form>
+	
+{% endblock %}
+
+

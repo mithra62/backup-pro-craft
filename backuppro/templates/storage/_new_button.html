@@ -1,0 +1,18 @@
+<div class="buttons">
+	{% if available_storage_engines|length >= 1 %}
+		<div class="btngroup submit">
+			<div class="btn submit menubtn add icon">{{ "new_storage_location"|m62Lang|t }}</div>
+			<div class="menu">
+				<ul>
+					{% for section in available_storage_engines %}
+						<li>
+							<a href="{{ url('backuppro/settings/storage/new?engine='~section.short_name) }}">{{ section.name|m62Lang|t }}</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% else %}
+		<a class="btn submit icon" >{{ "No Storage Engines"|t }}</a>
+	{% endif %}
+</div>

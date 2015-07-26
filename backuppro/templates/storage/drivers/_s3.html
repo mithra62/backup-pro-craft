@@ -1,0 +1,51 @@
+{{ forms.textField({
+        label: "s3_access_key"|m62Lang|t,
+        id: 's3_access_key',
+        name: 's3_access_key',
+        value: form_data.s3_access_key,
+        instructions: "s3_access_key_instructions"|m62Lang|t,
+        errors: form_errors.s3_access_key
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "s3_secret_key"|m62Lang|t,
+        id: 's3_secret_key',
+        name: 's3_secret_key',
+        value: form_data.s3_secret_key,
+        instructions: "s3_secret_key_instructions"|m62Lang|t,
+        errors: form_errors.s3_secret_key
+    }) 
+}}
+
+{{ forms.textField({
+        label: "s3_bucket"|m62Lang|t,
+        id: 's3_bucket',
+        name: 's3_bucket',
+        value: form_data.s3_bucket,
+        instructions: "s3_bucket_instructions"|m62Lang|t,
+        errors: form_errors.s3_bucket
+    }) 
+}}
+
+<hr />
+{{ forms.textField({
+        label: "s3_optional_prefix"|m62Lang|t,
+        id: 's3_optional_prefix',
+        name: 's3_optional_prefix',
+        value: form_data.s3_optional_prefix,
+        instructions: "s3_optional_prefix_instructions"|m62Lang|t,
+        errors: form_errors.s3_optional_prefix
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "s3_reduced_redundancy"|m62Lang|t,
+        id: 's3_reduced_redundancy',
+        name: 's3_reduced_redundancy',
+        value: 1,
+        instructions: "s3_reduced_redundancy_instructions"|m62Lang|t,
+        checked: form_data.s3_reduced_redundancy,
+        errors: form_errors.s3_reduced_redundancy
+    }) 
+}}

@@ -1,0 +1,65 @@
+
+<input type="hidden" name="redirect" value="{{ craft.request.url }}" />
+{{ getCsrfInput() }}
+
+{{ forms.textField({
+        label: "storage_location_name"|m62Lang|t,
+        id: 'storage_location_name',
+        name: 'storage_location_name',
+        value: form_data.storage_location_name,
+        instructions: "storage_location_name_instructions"|m62Lang|t,
+        errors: form_errors.storage_location_name
+    }) 
+}}		
+
+{% if _form_template != '' %}
+	<hr />
+	{% include _form_template %}
+	<hr />
+{% endif %}
+
+{{ forms.checkboxField({
+        label: "storage_location_status"|m62Lang|t,
+        id: 'storage_location_status',
+        name: 'storage_location_status',
+        value: '1',
+        instructions: "storage_location_status_instructions"|m62Lang|t,
+      	checked: form_data.storage_location_status,
+        errors: form_errors.storage_location_status
+    }) 
+}}	
+
+{{ forms.checkboxField ({
+        label: "storage_location_file_use"|m62Lang|t,
+        id: 'storage_location_file_use',
+        name: 'storage_location_file_use',
+        value: '1',
+        instructions: "storage_location_file_use_instructions"|m62Lang|t,
+      	checked: form_data.storage_location_file_use,
+        errors: form_errors.storage_location_file_use
+    }) 
+}}	
+
+{{ forms.checkboxField({
+        label: "storage_location_db_use"|m62Lang|t,
+        id: 'storage_location_db_use',
+        name: 'storage_location_db_use',
+        value: '1',
+        instructions: "storage_location_db_use_instructions"|m62Lang|t,
+      	checked: form_data.storage_location_db_use,
+        errors: form_errors.storage_location_db_use
+    }) 
+}}	
+
+{{ forms.checkboxField({
+        label: "storage_location_include_prune"|m62Lang|t,
+        id: 'storage_location_include_prune',
+        name: 'storage_location_include_prune',
+        value: '1',
+        instructions: "storage_location_include_prune_instructions"|m62Lang|t,
+      	checked: form_data.storage_location_include_prune,
+        errors: form_errors.storage_location_include_prune
+    }) 
+}}	
+
+

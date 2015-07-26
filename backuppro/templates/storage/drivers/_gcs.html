@@ -1,0 +1,51 @@
+{{ forms.textField({
+        label: "s3_access_key"|m62Lang|t,
+        id: 'gcs_access_key',
+        name: 'gcs_access_key',
+        value: form_data.gcs_access_key,
+        instructions: "gcs_access_key_instructions"|m62Lang|t,
+        errors: form_errors.gcs_access_key
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "gcs_secret_key"|m62Lang|t,
+        id: 'gcs_secret_key',
+        name: 'gcs_secret_key',
+        value: form_data.gcs_secret_key,
+        instructions: "gcs_secret_key_instructions"|m62Lang|t,
+        errors: form_errors.gcs_secret_key
+    }) 
+}}
+
+{{ forms.textField({
+        label: "gcs_bucket"|m62Lang|t,
+        id: 'gcs_bucket',
+        name: 'gcs_bucket',
+        value: form_data.gcs_bucket,
+        instructions: "gcs_bucket_instructions"|m62Lang|t,
+        errors: form_errors.gcs_bucket
+    }) 
+}}
+
+<hr />
+{{ forms.textField({
+        label: "gcs_optional_prefix"|m62Lang|t,
+        id: 'gcs_optional_prefix',
+        name: 'gcs_optional_prefix',
+        value: form_data.gcs_optional_prefix,
+        instructions: "gcs_optional_prefix_instructions"|m62Lang|t,
+        errors: form_errors.gcs_optional_prefix
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "gcs_reduced_redundancy"|m62Lang|t,
+        id: 'gcs_reduced_redundancy',
+        name: 'gcs_reduced_redundancy',
+        value: 1,
+        instructions: "gcs_reduced_redundancy_instructions"|m62Lang|t,
+        checked: form_data.gcs_reduced_redundancy,
+        errors: form_errors.gcs_reduced_redundancy
+    }) 
+}}

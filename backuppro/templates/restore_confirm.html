@@ -1,0 +1,53 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "dashboard" %}
+{% set selSidebar = "database_backups" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "dashboard"|m62Lang|t, url: url('backuppro') },
+	{ label: "database_backups"|m62Lang|t, url: url('backuppro/database_backups') },
+	{ label: "restore_db"|m62Lang|t, url: '' }
+] %}
+
+
+{% set sidebar %}
+	{% include 'backuppro/_includes/_dashboard_sidebar' %}
+{% endset %}
+
+{% import "_includes/forms" as forms %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	
+	<h2>{{ "restore_db"|m62Lang|t }}</h2>
+	
+	<p>{{ "restore_db_question"|m62Lang|t }}</p>
+	<p class="notice">{{ "action_can_not_be_undone"|m62Lang|t }} {{ "restore_double_speak"|m62Lang|t }}</p>
+	
+	<p>
+		<strong>{{ "taken"|m62Lang|t }}:</strong> {{ backup.created_date|m62DateTime|raw }} <br />
+		<strong>{{ "backup_type"|m62Lang|t }}:</strong> {{ backup.database_backup_type|m62Lang|t }} <br />
+		<strong>{{ "verified"|m62Lang|t }}:</strong> 
+			{% if backup.verified == '1' %}
+				<span class="">{{ "yes"|m62Lang|t }}</span>
+			{% else %}
+				<span class="notice">{{ "no"|m62Lang|t }}</span>
+			{% endif %} <br />
+		<strong>{{ "time_taken"|m62Lang|t }}:</strong> {{ backup.time_taken|number_format(2, '.', ',') }}s <br />
+		<strong>{{ "max_memory"|m62Lang|t }}:</strong> {{ backup.max_memory|m62FileSize }} <br />
+		<strong>{{ "uncompressed_sql_size"|m62Lang|t }}:</strong> {{ backup.uncompressed_size|m62FileSize }} <br />
+		<strong>{{ "total_tables"|m62Lang|t }}:</strong> {{ backup.item_count }} <br />
+		<strong>{{ "md5_hash"|m62Lang|t }}:</strong> {{ backup.hash }}
+	</p>
+	
+	<form name="update_settings" action="{{ url('backuppro/restore/database') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" method="post" accept-charset="UTF-8" />
+	{{ getCsrfInput() }}
+
+		<div class="buttons">
+			<input type="submit" value="{{ "restore"|m62Lang|t }}" class="btn submit" >
+		</div>
+	</form>
+	
+{% endblock %}

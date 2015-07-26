@@ -1,0 +1,20 @@
+
+{{ forms.textareaField({
+        label: "email_storage_emails"|m62Lang|t,
+        id: 'email_storage_emails',
+        name: 'email_storage_emails',
+        value: form_data.email_storage_emails,
+        instructions: "email_storage_emails_instructions"|m62Lang|t,
+        errors: form_errors.email_storage_emails
+    }) 
+}}
+
+{{ forms.textField({
+        label: "email_storage_attach_threshold"|m62Lang|t,
+        id: 'email_storage_attach_threshold',
+        name: 'email_storage_attach_threshold',
+        value: form_data.email_storage_attach_threshold,
+        instructions: "email_storage_attach_threshold_instructions"|m62Lang|t,
+        errors: form_errors.email_storage_attach_threshold
+    }) 
+}}

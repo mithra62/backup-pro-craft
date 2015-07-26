@@ -1,0 +1,14 @@
+{% for key, error in errors %}
+	<div class="backup_pro_system_error">
+	
+		{{ error|m62Lang|t }} 
+		{% if key == 'no_storage_locations_setup' %}
+			<a href="{{ url('backuppro/settings/storage/new?engine=local') }}">Setup Storage Location</a>
+		{% endif %}	
+		
+		{% if error == 'missing_license_number' %}
+			<a href="{{ url('backuppro/settings/license') }}">Enter License</a> or <a href="https://mithra62.com/projects/view/backup-pro">Buy A License</a>
+		{% endif %}	
+		
+	</div>
+{% endfor %}

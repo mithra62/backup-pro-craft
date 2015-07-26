@@ -1,0 +1,75 @@
+{% extends "backuppro/_includes/_layout" %}
+{% set title = "backup_pro_module_name"|m62Lang|t %}
+
+{% set selectedTab = "dashboard" %}
+{% set selSidebar = "file_backups" %}
+{% set crumbs = [
+	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
+	{ label: "file_backups"|m62Lang|t, url: url('backuppro/database_backups') }
+] %}
+
+{% set sidebar %}
+	{% include 'backuppro/_includes/_dashboard_sidebar' %}
+{% endset %}
+
+{% block content %}
+
+	{% include 'backuppro/_includes/_errors' %}
+	
+	<table class="data "  width="100%"  border="0" cellpadding="0" cellspacing="0">
+	<thead>
+		<tr class="even">
+			<th>{{ "total_backups"|m62Lang|t }}</th>
+			<th style="width:65%">{{ "total_space_used"|m62Lang|t }}</th>
+			<th><div style="float:right">{{ "last_backup_taken"|m62Lang|t }}</div></th>
+			<th><div style="float:right">{{ "first_backup_taken"|m62Lang|t }}</div></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="odd">
+			<td>{{ backup_meta.files.total_backups }}</td>
+			<td>{{ backup_meta.files.total_space_used }}</td>
+			<td>
+				<div style="float:right">
+					{% if backup_meta.files.newest_backup_taken != ''  %}
+						{{ backup_meta.files.newest_backup_taken|m62DateTime|raw }}
+					{% else %}
+						{{ "na"|m62Lang|t }}
+					{% endif %}
+				</div>
+			</td>
+			<td width="150">
+				<div style="float:right">
+					{% if backup_meta.files.oldest_backup_taken != ''  %}
+						{{ backup_meta.files.oldest_backup_taken|m62DateTime|raw }}
+					{% else %}
+						{{ "na"|m62Lang|t }}
+					{% endif %}
+				</div>
+			</td>
+		</tr>
+	</tbody>
+	</table>	
+	
+	<h3>{{ "file_backups"|m62Lang|t }} ( {{ backups.files|length }} )</h3>
+	
+	{% if backups.files|length == '0' %}
+		{{ "no_backups_exist"|m62Lang|t }} <a href="{{ url('backuppro/backup/files') }}">{{ "would_you_like_to_backup_files_now"|m62Lang|t }}</a>
+	{% else %}
+	
+		
+		<form name="update_settings" action="{{ url('backuppro/delete/confirm') }}" method="post" accept-charset="UTF-8" />
+		{{ getCsrfInput() }}
+		<input type="hidden" name="type" id="hidden_backup_type" value="files" />
+		
+		{% include 'backuppro/_includes/_backup_table' with {'enable_type': 'no', '_backups': backups.files, 'enable_delete':'yes', 'enable_editable_note':'yes', 'enable_actions':'yes' } %}
+		
+		<div class="buttons right">
+			<input type="submit" value="{{ "delete_backups"|m62Lang|t }}" class="btn submit" >
+		</div>
+		
+		</form>
+				
+	{% endif %}
+	
+{% endblock %}

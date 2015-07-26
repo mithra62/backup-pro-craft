@@ -1,0 +1,91 @@
+<h2>{{ "integrity_agent_cron"|m62Lang|t }}</h2>
+
+
+<hr />
+<h2>{{ "configure_integrity_agent_verification"|m62Lang|t }}</h2>
+
+{{ forms.textField({
+        label: "db_verification_db_name"|m62Lang|t,
+        id: 'db_verification_db_name',
+        name: 'db_verification_db_name',
+        value: form_data.db_verification_db_name,
+        instructions: "db_verification_db_name_instructions"|m62Lang|t,
+        errors: form_errors.db_verification_db_name
+    }) 
+}}
+
+{{ forms.textField({
+        label: "total_verifications_per_execution"|m62Lang|t,
+        id: 'total_verifications_per_execution',
+        name: 'total_verifications_per_execution',
+        value: form_data.total_verifications_per_execution,
+        instructions: "total_verifications_per_execution_instructions"|m62Lang|t,
+        errors: form_errors.total_verifications_per_execution
+    }) 
+}}
+
+{{ forms.checkboxField({
+        label: "check_backup_state_cp_login"|m62Lang|t,
+        id: 'check_backup_state_cp_login',
+        name: 'check_backup_state_cp_login',
+        value: form_data.check_backup_state_cp_login,
+        instructions: "check_backup_state_cp_login_instructions"|m62Lang|t,
+        checked: form_data.check_backup_state_cp_login,
+        errors: form_errors.check_backup_state_cp_login
+    }) 
+}}
+
+<hr />
+<h2>{{ "configure_integrity_agent_backup_missed_schedule"|m62Lang|t }}</h2>
+
+{{ forms.textField({
+        label: "backup_missed_schedule_notify_email_interval"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_email_interval',
+        name: 'backup_missed_schedule_notify_email_interval',
+        value: form_data.backup_missed_schedule_notify_email_interval,
+        instructions: "backup_missed_schedule_notify_email_interval_instructions"|m62Lang|t,
+        errors: form_errors.backup_missed_schedule_notify_email_interval
+    }) 
+}}
+
+{{ forms.multiselectField({
+        label: "backup_missed_schedule_notify_member_ids"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_member_ids',
+        name: 'backup_missed_schedule_notify_member_ids',
+        value: form_data.backup_missed_schedule_notify_member_ids,
+        instructions: "backup_missed_schedule_notify_member_ids_instructions"|m62Lang|t,
+        options: { php:"php"|m62Lang|t, mysqldump:"mysqldump"|m62Lang|t },
+        errors: form_errors.backup_missed_schedule_notify_member_ids
+    }) 
+}}
+
+{{ forms.selectField({
+        label: "backup_missed_schedule_notify_email_mailtype"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_email_mailtype',
+        name: 'backup_missed_schedule_notify_email_mailtype',
+        value: form_data.backup_missed_schedule_notify_email_mailtype,
+        instructions: "backup_missed_schedule_notify_email_mailtype_instructions"|m62Lang|t,
+        options: { us:"us"|m62Lang|t, uk:"uk"|m62Lang|t },
+        errors: form_errors.backup_missed_schedule_notify_email_mailtype
+    }) 
+}}
+
+{{ forms.textField({
+        label: "backup_missed_schedule_notify_email_subject"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_email_subject',
+        name: 'backup_missed_schedule_notify_email_subject',
+        value: form_data.backup_missed_schedule_notify_email_subject,
+        instructions: "backup_missed_schedule_notify_email_subject_instructions"|m62Lang|t,
+        errors: form_errors.backup_missed_schedule_notify_email_subject
+    }) 
+}}
+
+{{ forms.textareaField({
+        label: "backup_missed_schedule_notify_email_message"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_email_message',
+        name: 'backup_missed_schedule_notify_email_message',
+        value: form_data.backup_missed_schedule_notify_email_message,
+        instructions: "backup_missed_schedule_notify_email_message_instructions"|m62Lang|t,
+        errors: form_errors.backup_missed_schedule_notify_email_message
+    }) 
+}}
