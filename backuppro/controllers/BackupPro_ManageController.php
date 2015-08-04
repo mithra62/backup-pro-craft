@@ -11,6 +11,7 @@
 namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
+use mithra62\BackupPro\Platforms\Controllers\Craft\Manage;
 
 /**
  * Craft - Backup Pro Backup Controller
@@ -22,47 +23,14 @@ use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
  */
 class BackupPro_ManageController extends CraftController
 {   
+    use Manage;
+    
     /**
      * Download a backup action
      */
     public function actionDownload()
     {
-        $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode(craft()->request->getParam('id'));
-        $type = craft()->request->getParam('type');
-        $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-		if($type == 'files')
-		{
-			$file = $storage->getStorage()->getFileBackupNamePath($file_name);
-		}
-		else
-		{
-			$file = $storage->getStorage()->getDbBackupNamePath($file_name);
-		}
-		
-		$backup_info = $this->services['backups']->setLocations($this->settings['storage_details'])->getBackupData($file);
-		$download_file_path = false;
-		foreach($backup_info['storage_locations'] AS $storage_location)
-		{
-		    if( $storage_location['obj']->canDownload() )
-		    {
-		        $download_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); //next, get file path
-		        break;
-		    }
-		}
-		
-		if($download_file_path && file_exists($download_file_path))
-		{
-			//$new_name = $backup->getStorage()->makePrettyFilename($file_name, $type, craft()->config->get('siteName'));
-			$this->services['files']->fileDownload($download_file_path);
-			exit;
-		}
-		else
-		{
-            craft()->userSession->setFlash('error', $this->services['lang']->__('db_backup_not_found'));
-            $this->redirect('backuppro');
-			exit;			
-		}
+        $this->download();
     }    
     
     /**
@@ -70,18 +38,7 @@ class BackupPro_ManageController extends CraftController
      */
     public function actionNote()
     {
-        $this->requireAjaxRequest();
-        $encrypt = $this->services['encrypt'];
-        $file_name = craft()->request->getParam('backup');
-        $backup_type = craft()->request->getParam('backup_type');
-        $note_text = craft()->request->getParam('note_text');
-        if($note_text && $file_name)
-        {
-            $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$backup_type;
-            $this->services['backup']->getDetails()->addDetails($file_name, $path, array('note' => $note_text));
-            echo json_encode(array('success'));
-        }
-        exit;
+        $this->update_backup_note();
     }
     
     /**
@@ -89,18 +46,7 @@ class BackupPro_ManageController extends CraftController
      */
     public function actionDeleteConfirm()
     {
-        $delete_backups = craft()->request->getParam('backups');
-        $type = craft()->request->getParam('type');
-        $backups = $this->validateBackups($delete_backups, $type);
-        $variables = array(
-            'settings' => $this->settings,
-            'backups' => $backups,
-            'backup_type' => $type,
-            'errors' => $this->errors
-        );
-        
-        $template = 'backuppro/delete_confirm';
-        $this->renderTemplate($template, $variables);        
+        $this->delete_backup_confirm(); 
     }
     
     /**
@@ -108,20 +54,7 @@ class BackupPro_ManageController extends CraftController
      */
     public function actionDeleteBackups()
     {
-        $this->requirePostRequest();
-        $delete_backups = craft()->request->getParam('backups');
-        $type = craft()->request->getParam('type');
-        $backups = $this->validateBackups($delete_backups, $type);
-        if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
-        {
-            craft()->userSession->setFlash('notice', $this->services['lang']->__('backups_deleted'));
-            $this->redirect('backuppro');
-        }   
-        else
-        {
-            craft()->userSession->setFlash('error', $this->services['lang']->__('backup_delete_failure'));
-            $this->redirect('backuppro');
-        }
+        $this->delete_backups();
     }
     
     /**
