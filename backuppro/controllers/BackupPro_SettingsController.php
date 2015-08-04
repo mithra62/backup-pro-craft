@@ -11,6 +11,7 @@
 namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
+use mithra62\BackupPro\Platforms\Controllers\Craft\Settings;
 
 /**
  * Craft - Backup Pro Settings Controller
@@ -22,6 +23,8 @@ use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
  */
 class BackupPro_SettingsController extends CraftController
 {
+    use Settings;
+    
     /**
      * The options that're array data
      * @var array
@@ -36,48 +39,6 @@ class BackupPro_SettingsController extends CraftController
      */
     public function actionEdit()
     {
-        $section = ( craft()->request->getParam('section') != '' ? craft()->request->getParam('section') : 'general' );
-        $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
-		$variables['form_data']['cron_notify_emails'] = implode(PHP_EOL, $this->settings['cron_notify_emails']);
-		$variables['form_data']['exclude_paths'] = implode(PHP_EOL, $this->settings['exclude_paths']);
-		$variables['form_data']['backup_file_location'] = implode(PHP_EOL, $this->settings['backup_file_location']);
-		$variables['form_data']['db_backup_archive_pre_sql'] = implode(PHP_EOL, $this->settings['db_backup_archive_pre_sql']);
-		$variables['form_data']['db_backup_archive_post_sql'] = implode(PHP_EOL, $this->settings['db_backup_archive_post_sql']);
-		$variables['form_data']['db_backup_execute_pre_sql'] = implode(PHP_EOL, $this->settings['db_backup_execute_pre_sql']);
-		$variables['form_data']['db_backup_execute_post_sql'] = implode(PHP_EOL, $this->settings['db_backup_execute_post_sql']);
-		
-        if(craft()->request->getRequestType() == 'POST')
-        {
-            $data = craft()->request->getPost();
-            
-            $variables['form_data'] = array_merge($this->multi, $data);
-            $backup = $this->services['backups'];
-            $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
-            $data['meta'] = $backup->getBackupMeta($backups);
-            $settings_errors = $this->services['settings']->validate($data);
-            if( !$settings_errors )
-            {
-                if( $this->services['settings']->update($data) )
-                {
-                    craft()->userSession->setFlash('notice', $this->services['lang']->__('settings_updated'));
-                    $this->redirect($this->platform->getCurrentUrl());
-                }
-            }
-            else
-            {
-                $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
-                craft()->userSession->setError(Craft::t($this->services['lang']->__('fix_form_errors')));
-            }
-        }
-        
-        $variables['section']= $section;
-        $variables['db_tables'] = $this->services['db']->getTables();
-		$variables['backup_cron_commands'] = $this->platform->getBackupCronCommands();
-		$variables['ia_cron_commands'] = $this->platform->getIaCronCommands();
-		$variables['errors'] = $this->errors;
-		$variables['threshold_options'] = $this->services['settings']->getAutoPruneThresholdOptions();	
-		$variables['available_db_backup_engines'] = $this->services['backup']->getDataBase()->getAvailableEnginesOptions();
-        $this->renderTemplate('backuppro/settings', $variables);
-        
+        $this->settings();        
     }    
 }

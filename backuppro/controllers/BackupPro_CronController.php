@@ -47,10 +47,6 @@ class BackupPro_CronController extends CraftController
      */
     public function actionIntegrityAgent()
     {
-		ini_set('memory_limit', -1);
-		set_time_limit(0); //limit the time to 1 hours
-		
-        echo __METHOD__;
-        exit;
+		$this->integrity();
     }    
 }

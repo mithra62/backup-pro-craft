@@ -5,7 +5,7 @@
 		<li><a href="{{ url('backuppro/settings?section=files') }}"{% if selSidebar == 'files' %} class="sel"{% endif %}>{{ "files_bp_settings_menu"|m62Lang|t }}</a></li>
 		<li><a href="{{ url('backuppro/settings?section=cron') }}"{% if selSidebar == 'cron' %} class="sel"{% endif %}>{{ "cron_bp_settings_menu"|m62Lang|t }}</a></li>
 		<li><a href="{{ url('backuppro/settings/storage') }}"{% if selSidebar == 'storage' %} class="sel"{% endif %}" >{{ "storage_location_bp_settings_menu"|m62Lang|t }}</a></li>
-		{# <li><a href="{{ url('backuppro/settings?section=ia') }}"{% if selSidebar == 'ia' %} class="sel"{% endif %}>{{ "integrity_agent_bp_settings_menu"|m62Lang|t }}</a></li> #}
+		<li><a href="{{ url('backuppro/settings?section=ia') }}"{% if selSidebar == 'ia' %} class="sel"{% endif %}>{{ "integrity_agent_bp_settings_menu"|m62Lang|t }}</a></li>
 		<li><a href="{{ url('backuppro/settings?section=license') }}"{% if selSidebar == 'license' %} class="sel"{% endif %}>{{ "license_details"|m62Lang|t }}</a></li>
 	</ul>
 </nav>
