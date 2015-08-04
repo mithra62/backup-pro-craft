@@ -12,6 +12,7 @@ namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
 use mithra62\Traits\Log;
+use mithra62\BackupPro\Platforms\Controllers\Craft\Backup;
 
 /**
  * Craft - Backup Pro Backup Controller
@@ -23,46 +24,14 @@ use mithra62\Traits\Log;
  */
 class BackupPro_BackupController extends CraftController
 {   
-    use Log;
+    use Log, Backup;
     
     /**
      * Manually execute a database backup
      */
     public function actionDatabase()
     {
-        @session_write_close();
-        $error = $this->services['errors'];
-        $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->getErrors();
-        if( $error->totalErrors() == '0' )
-        {
-            ini_set('memory_limit', -1);
-            set_time_limit(0);
-
-            $db_info = $this->platform->getDbCredentials();
-            if( $backup->setDbInfo($db_info)->database($db_info['database'], $this->settings, $this->services['shell']) )
-            {
-                $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])
-                                                     ->getAllBackups($this->settings['storage_details']);
-                
-                $backup->getStorage()->getCleanup()->setStorageDetails($this->settings['storage_details'])
-                                                   ->setBackups($backups)
-                                                   ->setDetails($this->services['backups']->getDetails())
-                                                   ->autoThreshold($this->settings['auto_threshold'])
-                                                   ->counts($this->settings['max_db_backups'])
-                                                   ->duplicates($this->settings['allow_duplicates']);
-                
-                craft()->userSession->setFlash('notice', 'Backup Complete!');
-                $this->redirect('backuppro/database_backups');
-            }
-        }
-        else
-        {
-            craft()->userSession->setFlash('notice', $error->getError());
-            $this->redirect('backuppro');
-        }
-        
-        exit;
+        $this->backup_database();
     }     
     
     /**
@@ -70,69 +39,11 @@ class BackupPro_BackupController extends CraftController
      */
     public function actionFile()
     {
-        @session_write_close();
-        $error = $this->services['errors'];
-        $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->getErrors();
-        if( $error->totalErrors() == '0' )
-        {
-            ini_set('memory_limit', -1);
-            set_time_limit(0);
-            if( $backup->files($this->settings, $this->services['files'], $this->services['regex']) )
-            {
-                $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])
-                                                     ->getAllBackups($this->settings['storage_details']);
-                
-                $backup->getStorage()->getCleanup()->setStorageDetails($this->settings['storage_details'])
-                                                   ->setBackups($backups)
-                                                   ->setDetails($this->services['backups']->getDetails())
-                                                   ->autoThreshold($this->settings['auto_threshold'])
-                                                   ->counts($this->settings['max_file_backups'], 'files')
-                                                   ->duplicates($this->settings['allow_duplicates']);
-                
-                craft()->userSession->setFlash('notice', 'Backup Complete!');
-                $this->redirect('backuppro/file_backups');
-                exit;
-            }
-        }
-        else
-        {
-            craft()->userSession->setFlash('notice', $error->getError());
-            $this->redirect('backuppro');
-            exit;
-        }
+        $this->backup_files();
     } 
     
     public function actionConfirm()
     {
-        $type = craft()->request->getParam('type');
-        $proc_url = false;
-        switch($type)
-        {
-            case 'database':
-                $proc_url = 'backuppro/backup/exec/db';
-                $selectedTab = 'backup_db';
-                break;
-            case 'files':
-                $proc_url = 'backuppro/backup/exec/file';
-                $selectedTab = 'backup_files';
-                break;
-        }
-        
-        if(!$proc_url)
-        {
-            craft()->userSession->setFlash('notice', $this->services['lang']->__('can_not_backup'));
-            $this->redirect('backuppro');
-            exit;
-        }
-        
-        $variables = array(
-            'proc_url' => $proc_url,
-            'errors' => $this->errors,
-            'backup_type' => $type,
-            'selectedTab' => $selectedTab
-        );   
-        $template = 'backuppro/backup';
-        $this->renderTemplate($template, $variables);    
+        $this->backup(); 
     }
 }
