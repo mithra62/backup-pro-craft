@@ -48,14 +48,13 @@
     }) 
 }}
 
-{{ forms.multiselectField({
-        label: "backup_missed_schedule_notify_member_ids"|m62Lang|t,
-        id: 'backup_missed_schedule_notify_member_ids',
-        name: 'backup_missed_schedule_notify_member_ids',
-        value: form_data.backup_missed_schedule_notify_member_ids,
-        instructions: "backup_missed_schedule_notify_member_ids_instructions"|m62Lang|t,
-        options: { php:"php"|m62Lang|t, mysqldump:"mysqldump"|m62Lang|t },
-        errors: form_errors.backup_missed_schedule_notify_member_ids
+{{ forms.textareaField({
+        label: "backup_missed_schedule_notify_emails"|m62Lang|t,
+        id: 'backup_missed_schedule_notify_emails',
+        name: 'backup_missed_schedule_notify_emails',
+        value: form_data.backup_missed_schedule_notify_emails,
+        instructions: "backup_missed_schedule_notify_emails_instructions"|m62Lang|t,
+        errors: form_errors.backup_missed_schedule_notify_emails
     }) 
 }}
 
@@ -65,7 +64,7 @@
         name: 'backup_missed_schedule_notify_email_mailtype',
         value: form_data.backup_missed_schedule_notify_email_mailtype,
         instructions: "backup_missed_schedule_notify_email_mailtype_instructions"|m62Lang|t,
-        options: { us:"us"|m62Lang|t, uk:"uk"|m62Lang|t },
+        options: { html:"html"|m62Lang|t, text:"text"|m62Lang|t },
         errors: form_errors.backup_missed_schedule_notify_email_mailtype
     }) 
 }}
