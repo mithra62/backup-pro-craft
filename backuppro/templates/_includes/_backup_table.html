@@ -32,7 +32,7 @@
 <tbody>
 {% for backup in _backups %}
 <tr class="odd">
-	<td class=" backup_pro_backup_status backup_pro_backup_warn"></td>
+	<td class=" backup_pro_backup_status backup_pro_backup_{{ backup.verified }}"></td>
 	{% if enable_delete is defined and enable_delete == 'yes' %}
 	<td>
 		{{ forms.checkbox({
