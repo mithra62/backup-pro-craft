@@ -11,6 +11,7 @@
 namespace Craft;
 
 use mithra62\BackupPro\Platforms\Console\Craft AS CraftCommand;
+use mithra62\BackupPro\Platforms\Controllers\Craft\Cron;
 
 /**
  * Craft - Backup Pro Cron Console Commands
@@ -22,6 +23,8 @@ use mithra62\BackupPro\Platforms\Console\Craft AS CraftCommand;
  */
 class BackupCommand extends CraftCommand
 {
+    use Cron;
+    
     /**
      * Backups up the database
      * @param string $notify Set to "yes" to send an email on backup completion
@@ -53,6 +56,11 @@ class BackupCommand extends CraftCommand
         $backup_paths['files'] = $backup->files($this->settings, $this->services['files'], $this->services['regex']); 
         $this->cleanup($backup)->notify($notify, $backup_paths, $backup);
     } 
+    
+    public function actionIntegrity()
+    {
+        $this->integrity();
+    }
     
     /**
      * Runs the Cleanup routines

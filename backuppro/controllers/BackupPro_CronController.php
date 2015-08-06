@@ -31,7 +31,7 @@ class BackupPro_CronController extends CraftController
      */
     protected $allowAnonymous = array(
         'actionBackup', 
-        'actionIntegrityAgent'
+        'actionIntegrity'
     );
     
     /**
@@ -45,8 +45,9 @@ class BackupPro_CronController extends CraftController
     /**
      * The Integrity Agent Cron
      */
-    public function actionIntegrityAgent()
+    public function actionIntegrity()
     {
 		$this->integrity();
+		exit;
     }    
 }

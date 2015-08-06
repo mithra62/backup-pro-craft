@@ -1,5 +1,31 @@
 <h2>{{ "integrity_agent_cron"|m62Lang|t }}</h2>
-
+<table class="mainTable" border="0" cellspacing="0" cellpadding="0">
+<thead>
+	<tr>
+		<th width='50%'>{{ "backup_type"|m62Lang|t }}</th>
+		<th width='30%'>{{ "cron_commands"|m62Lang|t }}</th>
+		<th width='20%'>{{ "test"|m62Lang|t }}</th>
+	</tr>
+</thead>
+<tbody>
+{% for key, cron in ia_cron_commands %}
+<tr class="even">
+	<td width='50%' style="width:50%;">{{ key|m62Lang|t }}</td>
+	<td style="width:50%;">
+		<div class="select_all">{{ cron.cmd }}</div>
+	</td>
+	<td style="width:50%;">
+		{% if cron.type == 'curl' %}
+		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}">
+			<img src="{{ resourceUrl('backuppro/images/test.png') }}" />
+		</a> <img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_{{ key }}" style="display:none" />
+		
+		{% endif %}
+	</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
 
 <hr />
 <h2>{{ "configure_integrity_agent_verification"|m62Lang|t }}</h2>
