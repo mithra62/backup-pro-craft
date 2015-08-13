@@ -14,7 +14,7 @@ namespace Craft;
 require_once 'vendor/autoload.php';
 
 use Craft\DbCommand;
-use mithra62\Platforms\Craft AS Platform;
+use mithra62\BackupPro\Platforms\Craft AS Platform;
 use mithra62\BackupPro\BackupPro;
 use mithra62\Twig\m62LangTwigExtension;
 use mithra62\BackupPro\Traits\Controller;
