@@ -10,5 +10,9 @@
 			<a href="{{ url('backuppro/settings/license') }}">Enter License</a> or <a href="https://mithra62.com/projects/view/backup-pro">Buy A License</a>
 		{% endif %}	
 		
+		{% if error == 'invalid_working_directory' %}
+			<a href="{{ url('backuppro/settings') }}">Check Working Directory</a>
+		{% endif %}	
+		
 	</div>
 {% endfor %}
