@@ -11,7 +11,6 @@
 namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
-use mithra62\BackupPro\Platforms\Controllers\Craft\Restore;
 
 /**
  * Craft - Backup Pro Restore Controller
@@ -23,7 +22,6 @@ use mithra62\BackupPro\Platforms\Controllers\Craft\Restore;
  */
 class BackupPro_RestoreController extends CraftController
 {   
-    use Restore;
     
     /**
      * The Backup Cron

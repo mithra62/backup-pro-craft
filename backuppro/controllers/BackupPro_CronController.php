@@ -12,6 +12,7 @@ namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
 use mithra62\BackupPro\Exceptions\BackupException;
+use mithra62\Traits\Log;
 
 /**
  * Craft - Backup Pro Cron Controller
@@ -23,6 +24,8 @@ use mithra62\BackupPro\Exceptions\BackupException;
  */
 class BackupPro_CronController extends CraftController
 {   
+    use Log;
+    
     /**
      * The methods anyone can access
      * @var array
@@ -37,6 +40,12 @@ class BackupPro_CronController extends CraftController
      */
     public function actionBackup()
     {
+        
+        if( \Craft\craft()->request->getParam('backup_pro') != $this->settings['cron_query_key'] )
+        {
+            exit;
+        }
+        
         @session_write_close();
         $error = $this->services['errors'];
         $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
@@ -97,6 +106,11 @@ class BackupPro_CronController extends CraftController
      */
     public function actionIntegrity()
     {
+        if( \Craft\craft()->request->getParam('backup_pro') != $this->settings['cron_query_key'] )
+        {
+            exit;
+        }
+        
         @ini_set('memory_limit', -1);
         @set_time_limit(0); //limit the time to 1 hours
         
@@ -166,5 +180,7 @@ class BackupPro_CronController extends CraftController
             'last_verification_time' => time()
         );
         $this->services['settings']->update($data);
+        
+        exit;
     }    
 }

@@ -13,32 +13,55 @@
 
 	{% include 'backuppro/_includes/_errors' %}
 
-<div id="backup_instructions">
-	{{ "backup_in_progress_instructions"|m62Lang|t|raw }}<br />
-</div>
-
-<div class="" id="_backup_start_container">
-	<a href="{{ url(proc_url) }}" id="_backup_direct" class="btn submit add icon nav_button">{{ "start_backup"|m62Lang|t }}</a>	
-	<div id="backup_running_details"  style="display:none" >
-	{{ "backup_in_progress"|m62Lang|t|raw }}
-	<img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_image" />
-	</div>
-</div>
-
-<div id="backup_dashboard_menu" style="display:none">
-	<?php $this->load->view('partials/backups_submenu'); ?>
-</div>
-<br clear="all" />
-
-<input type="hidden" id="__backup_proc_url" value="{{ proc_url }}">
-<input type="hidden" id="__backup_type" value="{{ backup_type }}">
-<input type="hidden" id="__lang_backup_progress_bar_stop" value="{{ "backup_progress_bar_stop"|m62Lang|t|raw }}">
-<input type="hidden" id="__lang_backup_progress_bar_running" value="{{ "backup_in_progress"|m62Lang|t|raw }}">
-
-<div id="progress_bar_container" style="display:none">
-	<span id="active_item"></span> <br />
-	<div id="progressbar"></div>
-	Total Items: <span id="item_number"></span> of <span id="total_items"></span> <br />
-	<span id="backup_complete"></span>
-</div>
+	{% if pre_backup_errors|length == '0' %}
+		<div id="backup_instructions">
+			{{ "backup_in_progress_instructions"|m62Lang|t|raw }}<br />
+		</div>
+		
+		<div class="" id="_backup_start_container">
+			<a href="{{ url(proc_url) }}" id="_backup_direct" class="btn submit add icon nav_button">{{ "start_backup"|m62Lang|t }}</a>	
+			<div id="backup_running_details"  style="display:none" >
+			{{ "backup_in_progress"|m62Lang|t|raw }}
+			<img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_image" />
+			</div>
+		</div>
+		
+		<br clear="all" />
+		
+		<input type="hidden" id="__backup_proc_url" value="{{ proc_url }}">
+		<input type="hidden" id="__backup_type" value="{{ backup_type }}">
+		<input type="hidden" id="__lang_backup_progress_bar_stop" value="{{ "backup_progress_bar_stop"|m62Lang|t|raw }}">
+		<input type="hidden" id="__lang_backup_progress_bar_running" value="{{ "backup_in_progress"|m62Lang|t|raw }}">
+		
+		<div id="progress_bar_container" style="display:none">
+			<span id="active_item"></span> <br />
+			<div id="progressbar"></div>
+			Total Items: <span id="item_number"></span> of <span id="total_items"></span> <br />
+			<span id="backup_complete"></span>
+		</div>
+	{% else %}
+		<p>You're going to need to fix the below configuration errors before you can start taking backups:</p>
+		{% for key, error in pre_backup_errors %}
+		
+			{{ error|m62Lang|t }} 
+			{% if key == 'no_storage_locations_setup' %}
+				<a href="{{ url('backuppro/settings/storage/new?engine=local') }}">Setup Storage Location</a>
+			{% endif %}	
+			
+			{% if error == 'missing_license_number' %}
+				<a href="{{ url('backuppro/settings') }}?section=license">Enter License</a> or <a href="https://mithra62.com/projects/view/backup-pro">Buy A License</a>
+			{% endif %}	
+			
+			{% if error == 'invalid_working_directory' %}
+				<a href="{{ url('backuppro/settings') }}">Check Working Directory</a>
+			{% endif %}	
+			
+			{% if error == 'no_backup_file_location' %}
+				<a href="{{ url('backuppro/settings?section=files') }}">Set File Backup Locations</a>
+			{% endif %}
+			<br />		
+		
+		{% endfor %}
+	
+	{% endif %}
 {% endblock %}

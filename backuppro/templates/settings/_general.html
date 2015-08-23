@@ -11,6 +11,16 @@
 }}
 
 {{ forms.textField({
+        label: "cron_query_key"|m62Lang|t,
+        id: 'cron_query_key',
+        name: 'cron_query_key',
+        value: form_data.cron_query_key,
+        instructions: "cron_query_key_instructions"|m62Lang|t,
+        errors: form_errors.cron_query_key
+    }) 
+}}
+
+{{ forms.textField({
         label: "dashboard_recent_total"|m62Lang|t,
         id: 'dashboard_recent_total',
         name: 'dashboard_recent_total',

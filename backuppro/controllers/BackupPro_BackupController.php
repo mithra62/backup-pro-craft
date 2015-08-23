@@ -32,7 +32,11 @@ class BackupPro_BackupController extends CraftController
     {
         $error = $this->services['errors'];
         $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->getErrors();
+        $errors = $error->clearErrors()
+                        ->checkStorageLocations($this->settings['storage_details'])
+                        ->checkBackupDirs($backup->getStorage())
+                        ->checkWorkingDirectory($this->settings['working_directory'])
+                        ->getErrors();
         if( $error->totalErrors() == '0' )
         {
             @session_write_close();
@@ -72,7 +76,11 @@ class BackupPro_BackupController extends CraftController
     {
         $error = $this->services['errors'];
         $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->checkFileBackupLocations($this->settings['backup_file_location'])->getErrors();
+        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])
+                        ->checkBackupDirs($backup->getStorage())
+                        ->checkWorkingDirectory($this->settings['working_directory'])
+                        ->checkFileBackupLocations($this->settings['backup_file_location'])
+                        ->getErrors();
         if( $error->totalErrors() == '0' )
         {
             @session_write_close();
@@ -84,11 +92,11 @@ class BackupPro_BackupController extends CraftController
                 ->getAllBackups($this->settings['storage_details']);
         
                 $backup->getStorage()->getCleanup()->setStorageDetails($this->settings['storage_details'])
-                ->setBackups($backups)
-                ->setDetails($this->services['backups']->getDetails())
-                ->autoThreshold($this->settings['auto_threshold'])
-                ->counts($this->settings['max_file_backups'], 'files')
-                ->duplicates($this->settings['allow_duplicates']);
+                                     ->setBackups($backups)
+                                     ->setDetails($this->services['backups']->getDetails())
+                                     ->autoThreshold($this->settings['auto_threshold'])
+                                     ->counts($this->settings['max_file_backups'], 'files')
+                                     ->duplicates($this->settings['allow_duplicates']);
         
                 \Craft\craft()->userSession->setFlash('notice', 'Backup Complete!');
                 $this->redirect('backuppro/file_backups');
@@ -113,10 +121,17 @@ class BackupPro_BackupController extends CraftController
             case 'database':
                 $proc_url = 'backuppro/backup/exec/db';
                 $selectedTab = 'backup_db';
+                $errors = $this->services['errors']->clearErrors()->checkWorkingDirectory($this->settings['working_directory'])
+                                                 ->checkStorageLocations($this->settings['storage_details'])
+                                                 ->getErrors();
                 break;
             case 'files':
                 $proc_url = 'backuppro/backup/exec/file';
                 $selectedTab = 'backup_files';
+                $errors = $this->services['errors']->clearErrors()->checkWorkingDirectory($this->settings['working_directory'])
+                                                 ->checkStorageLocations($this->settings['storage_details'])
+                                                 ->checkFileBackupLocations($this->settings['backup_file_location'])
+                                                 ->getErrors();
                 break;
         }
         
@@ -130,6 +145,7 @@ class BackupPro_BackupController extends CraftController
         $variables = array(
             'proc_url' => $proc_url,
             'errors' => $this->errors,
+            'pre_backup_errors' => $errors,
             'backup_type' => $type,
             'selectedTab' => $selectedTab
         );
