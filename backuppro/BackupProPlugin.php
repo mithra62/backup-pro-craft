@@ -60,6 +60,9 @@ class BackupProPlugin extends BasePlugin implements BackupPro
         try {
             $this->platform = new Platform();
             $this->m62->setDbConfig($this->platform->getDbCredentials());
+            $this->m62->setService('platform', function($c) {
+                return $this->platform;
+            });
         }
         catch(PlatformsException $e)
         {
