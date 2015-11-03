@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Backup Pro Craft" default="move_zip">
+	
+	<property name="platform_name" value="Craft" />
+	<property name="build_path" value="../builds/craft" />
+	<property name="build_container_dir" value="${build_path}/craft" />
+	<property name="main_files" value="craft" />
+	<property name="cms_root_path" value="${build_container_dir}" /> 
+	<property name="vendor_path" value="${cms_root_path}/vendor" />
+	<property name="backup_pro_logic_base" value="${cms_root_path}/mithra62/BackupPro" />
+	<property name="jaeger_base" value="${cms_root_path}/mithra62" />
+		
+	<property name="platform_theme_base" value="${build_container_dir}/resources" />		
+	<property name="backup_pro_theme_base" value="${platform_theme_base}" />
+	<property name="build_archive_path" value="${build_path}/backuppro.craft.${version}.zip" />
+	<property name="export_archive_path" value="../../product-export/craft/backuppro.craft.${version}.zip" />
+		
+	<property name="clean_install_bp_core_file_path" value="../../clean_cms/craft/craft/plugins/backuppro" />
+	<property name="clean_install_bp_theme_path" value="${clean_install_bp_core_file_path}/resources" />
+		
+	<property name="clean_install_cms_add_on_path" value="${clean_install_bp_core_file_path}" />
+	<property name="clean_install_cms_theme" value="${clean_install_cms_add_on_path}/resources" />
+
+	<import file="../backup-pro-lib/phing.prepare.xml" />
+	<import file="../backup-pro-lib/phing.unit-test.xml" /> 
+	<import file="../backup-pro-lib/phing.cms-files.xml" />
+	<import file="../backup-pro-lib/phing.vendor.xml" /> 
+	<import file="../backup-pro-lib/phing.bp-files.xml" />
+	<import file="../backup-pro-lib/phing.clean-install.xml" /> 
+	<import file="../backup-pro-lib/phing.archive.xml" />
+		
+</project>
