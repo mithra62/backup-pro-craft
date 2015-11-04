@@ -20,13 +20,14 @@
 		
 	<property name="clean_install_cms_add_on_path" value="../../clean_cms/craft/craft" />
 	<property name="clean_install_cms_theme" value="${clean_install_cms_add_on_path}/plugins/backuppro/resources" />
-
+	<property name="mink_test_dir" value="Craft" />
+	
 	<import file="../backup-pro-lib/phing.prepare.xml" />
-	<import file="../backup-pro-lib/phing.unit-test.xml" /> 
 	<import file="../backup-pro-lib/phing.cms-files.xml" />
-	<import file="../backup-pro-lib/phing.vendor.xml" /> 
-	<import file="../backup-pro-lib/phing.bp-files.xml" />
-	<import file="../backup-pro-lib/phing.clean-install.xml" /> 
-	<import file="../backup-pro-lib/phing.archive.xml" />
+	<import file="../backup-pro-lib/phing.vendor-no-dev.xml" /> 
+	<import file="../backup-pro-lib/phing.bp-files.xml" /> 
+	<import file="../backup-pro-lib/phing.clean-install.xml" />  
+	<import file="../backup-pro-lib/phing.unit-test.xml" /> 
+	<import file="../backup-pro-lib/phing.archive.xml" /> 
 		
 </project>
