@@ -54,7 +54,7 @@
 	<h3>{{ "database_backups"|m62Lang|t }} ( {{ backups.database|length }} )</h3>
 	
 	{% if backups.database|length == '0' %}
-		{{ "no_backups_exist"|m62Lang|t }} <a href="{{ url('backuppro/backup/db') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
+		{{ "no_database_backups"|m62Lang|t }} <a href="{{ url('backuppro/backup/db') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
 	{% else %}
 	
 	
