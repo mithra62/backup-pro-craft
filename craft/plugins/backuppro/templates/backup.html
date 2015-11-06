@@ -40,7 +40,7 @@
 			<span id="backup_complete"></span>
 		</div>
 	{% else %}
-		<p>You're going to need to fix the below configuration errors before you can start taking backups:</p>
+		<p>{{ "pre_backup_setting_issue_blurb"|m62Lang|t|raw }}:</p>
 		{% for key, error in pre_backup_errors %}
 		
 			{{ error|m62Lang|t }} 
