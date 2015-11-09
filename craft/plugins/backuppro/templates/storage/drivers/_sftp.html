@@ -1,0 +1,71 @@
+{{ forms.textField({
+        label: "sftp_host"|m62Lang|t,
+        id: 'sftp_host',
+        name: 'sftp_host',
+        value: form_data.sftp_host,
+        instructions: "sftp_host_instructions"|m62Lang|t,
+        errors: form_errors.sftp_host
+    }) 
+}}
+
+{{ forms.textField({
+        label: "sftp_username"|m62Lang|t,
+        id: 'sftp_username',
+        name: 'sftp_username',
+        value: form_data.sftp_username,
+        instructions: "sftp_username_instructions"|m62Lang|t,
+        errors: form_errors.sftp_username
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "sftp_password"|m62Lang|t,
+        id: 'sftp_password',
+        name: 'sftp_password',
+        value: form_data.sftp_password,
+        instructions: "sftp_password"|m62Lang|t,
+        errors: form_errors.sftp_password
+    }) 
+}}
+
+{{ forms.textField({
+        label: "sftp_private_key"|m62Lang|t,
+        id: 'sftp_private_key',
+        name: 'sftp_private_key',
+        value: form_data.sftp_private_key,
+        instructions: "sftp_private_key_instructions"|m62Lang|t,
+        errors: form_errors.sftp_private_key
+    }) 
+}}
+
+{{ forms.textField({
+        label: "sftp_root"|m62Lang|t,
+        id: 'sftp_root',
+        name: 'sftp_root',
+        value: form_data.sftp_root,
+        instructions: "sftp_root_instructions"|m62Lang|t,
+        errors: form_errors.sftp_root
+    }) 
+}}
+
+<hr />
+{{ forms.textField({
+        label: "sftp_timeout"|m62Lang|t,
+        id: 'sftp_timeout',
+        name: 'sftp_timeout',
+        value: form_data.sftp_timeout,
+        instructions: "sftp_timeout_instructions"|m62Lang|t,
+        errors: form_errors.sftp_timeout
+    }) 
+}}
+
+
+{{ forms.textField({
+        label: "sftp_port"|m62Lang|t,
+        id: 'sftp_port',
+        name: 'sftp_port',
+        value: form_data.sftp_port,
+        instructions: "sftp_port_instructions"|m62Lang|t,
+        errors: form_errors.sftp_port
+    }) 
+}}
