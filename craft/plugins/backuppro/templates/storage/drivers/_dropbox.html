@@ -1,0 +1,29 @@
+{{ forms.passwordField({
+        label: "dropbox_access_token"|m62Lang|t,
+        id: 'dropbox_access_token',
+        name: 'dropbox_access_token',
+        value: form_data.dropbox_access_token,
+        instructions: "dropbox_access_token_instructions"|m62Lang|t,
+        errors: form_errors.dropbox_access_token
+    }) 
+}}
+
+{{ forms.passwordField({
+        label: "dropbox_app_secret"|m62Lang|t,
+        id: 'dropbox_app_secret',
+        name: 'dropbox_app_secret',
+        value: form_data.dropbox_app_secret,
+        instructions: "dropbox_app_secret_instructions"|m62Lang|t,
+        errors: form_errors.dropbox_app_secret
+    }) 
+}}
+
+{{ forms.textField({
+        label: "dropbox_prefix"|m62Lang|t,
+        id: 'dropbox_prefix',
+        name: 'dropbox_prefix',
+        value: form_data.dropbox_prefix,
+        instructions: "dropbox_prefix_instructions"|m62Lang|t,
+        errors: form_errors.dropbox_prefix
+    }) 
+}}
