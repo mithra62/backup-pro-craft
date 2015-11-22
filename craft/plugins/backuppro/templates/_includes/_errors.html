@@ -3,16 +3,40 @@
 	
 		{{ error|m62Lang|t }} 
 		{% if key == 'no_storage_locations_setup' %}
-			<a href="{{ url('backuppro/settings/storage/new?engine=local') }}">Setup Storage Location</a>
+			<a href="{{ url('backuppro/settings/storage/new?engine=local') }}">{{ "setup_storage_location"|m62Lang|t }}</a>
 		{% endif %}	
 		
 		{% if error == 'missing_license_number' %}
-			<a href="{{ url('backuppro/settings') }}?section=license">Enter License</a> or <a href="https://mithra62.com/projects/view/backup-pro">Buy A License</a>
+			<a href="{{ url('backuppro/settings') }}?section=license">{{ "enter_license"|m62Lang|t }}</a> or <a href="https://mithra62.com/projects/view/backup-pro">{{ "purchase_a_license"|m62Lang|t }}</a>
 		{% endif %}	
 		
 		{% if error == 'invalid_working_directory' %}
-			<a href="{{ url('backuppro/settings') }}">Check Working Directory</a>
+			<a href="{{ url('backuppro/settings') }}">{{ "check_working_dir"|m62Lang|t }}</a>
 		{% endif %}	
+		
+		{% if error == 'no_db_backups_exist_yet' %}
+			<a href="{{ url('backuppro/backup?type=database') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
+		{% endif %}	
+		
+		{% if error == 'no_file_backups_exist_yet' %}
+			<a href="{{ url('backuppro/backup?type=files') }}">{{ "would_you_like_to_backup_files_now"|m62Lang|t }}</a>
+		{% endif %}	
+		
+		{% if error == 'db_backup_past_expectation_stub' %}
+			{{ "db_backup_past_expectation"|m62Lang|t|format(
+				backup_meta.database.newest_backup_taken_raw|m62RelativeDateTime, url('backuppro/backup?type=database')
+			)|raw
+			}}
+			
+		{% endif %}	
+		
+		{% if error == 'file_backup_past_expectation_stub' %}
+			{{ "files_backup_past_expectation"|m62Lang|t|format(
+				backup_meta.files.newest_backup_taken_raw|m62RelativeDateTime, url('backuppro/backup?type=files')
+			)|raw
+			}}
+			
+		{% endif %}		
 		
 	</div>
 {% endfor %}
