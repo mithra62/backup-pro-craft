@@ -39,3 +39,14 @@
         errors: form_errors.exclude_paths
     }) 
 }}
+
+{{ forms.checkboxField({
+        label: "regex_file_exclude"|m62Lang|t,
+        id: 'regex_file_exclude',
+        name: 'regex_file_exclude',
+        value: 1,
+        instructions: "regex_file_exclude_instructions"|m62Lang|t,
+        checked: form_data.regex_file_exclude,
+        errors: form_errors.regex_file_exclude
+    }) 
+}}

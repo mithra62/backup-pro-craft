@@ -45,6 +45,18 @@
 	}}
 </div>
 
+<div id="php_backup_method_select_chunk_limit_wrap" style="display:none;">
+{{ forms.textField({
+        label: "php_backup_method_select_chunk_limit"|m62Lang|t,
+        id: 'php_backup_method_select_chunk_limit',
+        name: 'php_backup_method_select_chunk_limit',
+        value: form_data.php_backup_method_select_chunk_limit,
+        instructions: "php_backup_method_select_chunk_limit_instructions"|m62Lang|t,
+        errors: form_errors.php_backup_method_select_chunk_limit
+    }) 
+}}
+</div>
+
 {{ forms.selectField({
         label: "db_restore_method"|m62Lang|t,
         id: 'db_restore_method',
