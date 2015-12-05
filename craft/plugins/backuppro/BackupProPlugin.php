@@ -127,6 +127,19 @@ class BackupProPlugin extends BasePlugin implements BackupPro
     {
         return 'mithra62';
     }
+    
+    /**
+     * Returns the icon path
+     */
+    public function getIconPath()
+    {
+        return craft()->path->getPluginsPath().'myplugin/resources/icon.svg';
+    }
+    
+    public function getDocumentationUrl()
+    {
+        return 'https://mithra62.com/docs/table-of-contents/backup-pro';
+    }
 
     /**
      * (non-PHPdoc)
@@ -154,7 +167,7 @@ class BackupProPlugin extends BasePlugin implements BackupPro
      */
     public function getSettingsUrl()
     {
-        return UrlHelper::getUrl('/backuppro');
+        return UrlHelper::getUrl('/admin/backuppro');
     }  
     
     /**
@@ -164,7 +177,12 @@ class BackupProPlugin extends BasePlugin implements BackupPro
     public function hasCpSection()
     {
         return false;
-    }    
+    } 
+    
+    public function getSchemaVersion()
+    {
+        return '1.0';
+    }
     
     /**
      * Sets up the Controller Routes
