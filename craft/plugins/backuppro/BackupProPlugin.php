@@ -107,7 +107,7 @@ class BackupProPlugin extends BasePlugin implements BackupPro
      */
     public function getName()
     {
-         return Craft::t('Backup Pro');
+         return Craft::t( $this->services['lang']->__('backup_pro_module_name') );
     }
 
     /**
@@ -176,12 +176,21 @@ class BackupProPlugin extends BasePlugin implements BackupPro
      */
     public function hasCpSection()
     {
-        return false;
+        return true;
     } 
     
+    /**
+     * 
+     * @return string
+     */
     public function getSchemaVersion()
     {
         return '1.0';
+    }
+    
+    public function getDescription()
+    {
+         return Craft::t( $this->services['lang']->__('backup_pro_module_description') );
     }
     
     /**
