@@ -14,6 +14,7 @@
 	<property name="backup_pro_theme_base" value="${platform_theme_base}" />
 	<property name="build_archive_path" value="${build_path}/backuppro.craft.${version}.zip" />
 	<property name="export_archive_path" value="../../product-export/craft/backuppro.craft.${version}.zip" />
+	<property name="export_archive_directory_root" value="${build_container_dir}" />
 		
 	<property name="clean_install_bp_core_file_path" value="../../clean_cms/craft/craft/plugins/backuppro" />
 	<property name="clean_install_bp_theme_path" value="${clean_install_bp_core_file_path}/resources" />
