@@ -1,7 +1,6 @@
-<nav>
-	<ul id="groups">
-		<li><a href="{{ url('backuppro') }}"{% if selSidebar == 'dashboard' %} class="sel"{% endif %}>{{ "dashboard"|m62Lang|t }}</a></li>
-		<li><a href="{{ url('backuppro/database_backups') }}"{% if selSidebar == 'database_backups' %} class="sel"{% endif %}>{{ "database_backups"|m62Lang|t }}</a></li>
-		<li><a href="{{ url('backuppro/file_backups') }}"{% if selSidebar == 'file_backups' %} class="sel"{% endif %}>{{ "file_backups"|m62Lang|t }}</a></li>
-	</ul>
-</nav>
+{% set tabs = {
+	dashboard: { label: "dashboard"|m62Lang|t, url: url('backuppro') },
+	backup_db: { label: "backup_db"|m62Lang|t, url: url('backuppro/backup?type=database') },
+	backup_files: { label: "backup_files"|m62Lang|t, url: url('backuppro/backup?type=files') },
+	settings: { label: "settings"|m62Lang|t, url: url('backuppro/settings') }
+} %}

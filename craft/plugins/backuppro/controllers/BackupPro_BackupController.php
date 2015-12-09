@@ -147,7 +147,8 @@ class BackupPro_BackupController extends CraftController
             'errors' => $this->errors,
             'pre_backup_errors' => $errors,
             'backup_type' => $type,
-            'selectedTab' => $selectedTab
+            'selectedTab' => $selectedTab,
+            'selectedSubnavItem' => $selectedTab
         );
         $template = 'backuppro/backup';
         $this->renderTemplate($template, $variables);

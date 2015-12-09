@@ -58,7 +58,9 @@ class BackupProController extends CraftController
             'backup_meta' => $backup_meta,
             'backups' => $backups,
             'available_space' => $available_space,
-            'errors' => $this->errors
+            'errors' => $this->errors,
+            'selected_tab' => 'dashboard',
+            'tab_set' => 'dashboard'
         );
         
         $template = 'backuppro/dashboard';
@@ -78,7 +80,8 @@ class BackupProController extends CraftController
             'settings' => $this->settings,
             'backup_meta' => $backup_meta,
             'backups' => $backups,
-            'errors' => $this->errors
+            'errors' => $this->errors,
+            'tab_set' => 'dashboard'
         );
         
         $template = 'backuppro/database_backups';
@@ -98,7 +101,8 @@ class BackupProController extends CraftController
             'settings' => $this->settings,
             'backup_meta' => $backup_meta,
             'backups' => $backups,
-            'errors' => $this->errors
+            'errors' => $this->errors,
+            'tab_set' => 'dashboard'
         );
         
         $template = 'backuppro/file_backups';

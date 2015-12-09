@@ -1,11 +1,19 @@
 {% extends "_layouts/cp" %}
 
-{% set tabs = {
+{% set subnav = {
 	dashboard: { label: "dashboard"|m62Lang|t, url: url('backuppro') },
 	backup_db: { label: "backup_db"|m62Lang|t, url: url('backuppro/backup?type=database') },
 	backup_files: { label: "backup_files"|m62Lang|t, url: url('backuppro/backup?type=files') },
 	settings: { label: "settings"|m62Lang|t, url: url('backuppro/settings') }
 } %}
+
+{% if tab_set == 'dashboard' %} 
+	{% set tabs = {
+		dashboard: { label: "home_bp_dashboard_menu"|m62Lang|t, url: url('backuppro') },
+		database_backups: { label: "db_bp_dashboard_menu"|m62Lang|t, url: url('backuppro/database_backups') },
+		file_backups: { label: "files_bp_dashboard_menu"|m62Lang|t, url: url('backuppro/file_backups') }
+	} %}
+{% endif %}
 
 {% includeCssResource "backuppro/css/backup_pro.css" %}
 {% includeCssResource "backuppro/css/chosen.css" %}

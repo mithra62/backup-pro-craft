@@ -71,6 +71,7 @@ class BackupPro_SettingsController extends CraftController
         }
         
         $variables['section']= $section;
+        $variables['selectedSubnavItem'] = 'settings';
         $variables['db_tables'] = $this->services['db']->getTables();
         $variables['backup_cron_commands'] = $this->platform->getBackupCronCommands($this->settings);
         $variables['ia_cron_commands'] = $this->platform->getIaCronCommands($this->settings);
