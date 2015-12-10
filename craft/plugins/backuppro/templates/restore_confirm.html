@@ -1,7 +1,7 @@
 {% extends "backuppro/_includes/_layout" %}
 {% set title = "backup_pro_module_name"|m62Lang|t %}
 
-{% set selectedTab = "dashboard" %}
+{% set selectedTab = "database_backups" %}
 {% set selSidebar = "database_backups" %}
 {% set crumbs = [
 	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
@@ -9,11 +9,6 @@
 	{ label: "database_backups"|m62Lang|t, url: url('backuppro/database_backups') },
 	{ label: "restore_db"|m62Lang|t, url: '' }
 ] %}
-
-
-{% set sidebar %}
-	{% include 'backuppro/_includes/_dashboard_sidebar' %}
-{% endset %}
 
 {% import "_includes/forms" as forms %}
 

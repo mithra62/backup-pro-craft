@@ -50,6 +50,9 @@ class BackupPro_StorageController extends CraftController
         $variables['errors'] = $this->errors;
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         $variables['storage_details'] = $this->settings['storage_details'];
+        $variables['section']= 'storage';
+        $variables['tab_set'] = 'settings';
+        $variables['selectedSubnavItem'] = 'settings';
         $this->renderTemplate('backuppro/storage', $variables);
     }
     
@@ -100,6 +103,9 @@ class BackupPro_StorageController extends CraftController
         {
             $variables['_form_template'] = 'backuppro/storage/drivers/_'.$engine;
         }
+        
+        $variables['tab_set'] = 'settings';
+        $variables['selectedSubnavItem'] = 'settings';
         $this->renderTemplate('backuppro/storage/new', $variables);
     }
     
@@ -147,7 +153,8 @@ class BackupPro_StorageController extends CraftController
             }
         }
         
-        
+        $variables['tab_set'] = 'settings';
+        $variables['selectedSubnavItem'] = 'settings';
         $this->renderTemplate('backuppro/storage/edit', $variables);
     }
     
@@ -197,7 +204,10 @@ class BackupPro_StorageController extends CraftController
                 \Craft\craft()->userSession->setError(\Craft\Craft::t($this->services['lang']->__('fix_form_errors')));
             }
         }
-        
+
+        $variables['section']= 'storage';
+        $variables['tab_set'] = 'settings';
+        $variables['selectedSubnavItem'] = 'settings';
         $this->renderTemplate('backuppro/storage/remove', $variables);
     }
 }

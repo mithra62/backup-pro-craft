@@ -1,14 +1,12 @@
 {% extends "backuppro/_includes/_layout" %}
 {% set title = "backup_pro_module_name"|m62Lang|t %}
 
-{% set selectedTab = "settings" %}
+{% set selectedTab = section %}
 {% set selSidebar = section %}
 {% set crumbs = [
 	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
 	{ label: "settings"|m62Lang|t, url: url('backuppro/settings/general') }
 ] %}
-
-
 
 {% import "_includes/forms" as forms %}
 

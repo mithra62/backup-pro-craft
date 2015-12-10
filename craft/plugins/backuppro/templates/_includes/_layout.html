@@ -15,6 +15,18 @@
 	} %}
 {% endif %}
 
+{% if tab_set == 'settings' %} 
+	{% set tabs = {
+		general: { label: "general_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings?section=general') },
+		db: { label: "db_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings?section=db') },
+		files: { label: "files_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings?section=files') },
+		cron: { label: "cron_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings?section=cron') },
+		storage: { label: "storage_location_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings/storage') },
+		ia: { label: "integrity_agent_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings?section=ia') },
+		license_details: { label: "license_details"|m62Lang|t, url: url('backuppro/settings?section=license') }
+	} %}
+{% endif %}
+
 {% includeCssResource "backuppro/css/backup_pro.css" %}
 {% includeCssResource "backuppro/css/chosen.css" %}
 

@@ -39,7 +39,9 @@ class BackupPro_RestoreController extends CraftController
             'backup' => $backup_info,
             'errors' => $this->errors
         );
-        
+
+        $variables['tab_set'] = 'dashboard';
+        $variables['selectedSubnavItem'] = 'settings';
         $template = 'backuppro/restore_confirm';
         $this->renderTemplate($template, $variables);
     }    

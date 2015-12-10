@@ -1,7 +1,7 @@
 {% extends "backuppro/_includes/_layout" %}
 {% set title = "backup_pro_module_name"|m62Lang|t %}
 
-{% set selectedTab = "settings" %}
+{% set selectedTab = "storage" %}
 {% set selSidebar = "storage" %}
 {% set crumbs = [
 	{ label: "backup_pro_module_name"|m62Lang|t, url: url('backuppro') },
@@ -9,17 +9,12 @@
 	{ label: "storage_location_bp_settings_menu"|m62Lang|t, url: url('backuppro/settings/storage') }
 ] %}
 
-
-{% set sidebar %}
-	{% include 'backuppro/storage/_new_button' %}
-	{% include 'backuppro/settings/_sidebar' %}
-{% endset %}
-
 {% import "_includes/forms" as forms %}
 
 {% block content %}
 
 	{% include 'backuppro/_includes/_errors' %}
+	{% include 'backuppro/storage/_new_button' %}
 	
 	<h2>{{ "existing_storage_locations"|m62Lang|t }}</h2>
 	<table border="0" cellspacing="0" cellpadding="0" class="data "  width="100%" >
