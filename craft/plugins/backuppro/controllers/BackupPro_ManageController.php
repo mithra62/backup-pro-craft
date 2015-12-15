@@ -28,8 +28,8 @@ class BackupPro_ManageController extends CraftController
     public function actionDownload()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode(\Craft\craft()->request->getParam('id'));
-        $type = \Craft\craft()->request->getParam('type');
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
+        $type = $this->platform->getPost('type');
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         if($type == 'files')
         {
@@ -72,9 +72,9 @@ class BackupPro_ManageController extends CraftController
     {
         $this->requireAjaxRequest();
         $encrypt = $this->services['encrypt'];
-        $file_name = \Craft\craft()->request->getParam('backup');
-        $backup_type = \Craft\craft()->request->getParam('backup_type');
-        $note_text = \Craft\craft()->request->getParam('note_text');
+        $file_name = $this->platform->getPost('backup');
+        $backup_type = $this->platform->getPost('backup_type');
+        $note_text = $this->platform->getPost('note_text');
         if($note_text && $file_name)
         {
             $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$backup_type;
@@ -89,8 +89,8 @@ class BackupPro_ManageController extends CraftController
      */
     public function actionDeleteConfirm()
     {
-        $delete_backups = \Craft\craft()->request->getParam('backups');
-        $type = \Craft\craft()->request->getParam('type');
+        $delete_backups = $this->platform->getPost('backups');
+        $type = $this->platform->getPost('type');
         $backups = $this->validateBackups($delete_backups, $type);
         $variables = array(
             'settings' => $this->settings,
@@ -109,8 +109,8 @@ class BackupPro_ManageController extends CraftController
     public function actionDeleteBackups()
     {
         $this->requirePostRequest();
-        $delete_backups = \Craft\craft()->request->getParam('backups');
-        $type = \Craft\craft()->request->getParam('type');
+        $delete_backups = $this->platform->getPost('backups');
+        $type = $this->platform->getPost('type');
         $backups = $this->validateBackups($delete_backups, $type);
         if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
         {

@@ -41,7 +41,7 @@ class BackupPro_CronController extends CraftController
     public function actionBackup()
     {
         
-        if( \Craft\craft()->request->getParam('backup_pro') != $this->settings['cron_query_key'] )
+        if( $this->platform->getPost('backup_pro') != $this->settings['cron_query_key'] )
         {
             exit;
         }
@@ -56,7 +56,7 @@ class BackupPro_CronController extends CraftController
             ini_set('memory_limit', -1);
             set_time_limit(0);
         
-            $backup_type = \Craft\craft()->request->getParam('type');
+            $backup_type = $this->platform->getPost('type');
             $backup_paths = array();
             switch($backup_type)
             {
@@ -106,7 +106,7 @@ class BackupPro_CronController extends CraftController
      */
     public function actionIntegrity()
     {
-        if( \Craft\craft()->request->getParam('backup_pro') != $this->settings['cron_query_key'] )
+        if( $this->platform->getPost('backup_pro') != $this->settings['cron_query_key'] )
         {
             exit;
         }

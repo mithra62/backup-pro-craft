@@ -29,7 +29,7 @@ class BackupPro_RestoreController extends CraftController
     public function actionConfirm()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode(\Craft\craft()->request->getParam('id'));
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         
         $file = $storage->getStorage()->getDbBackupNamePath($file_name);
@@ -52,7 +52,7 @@ class BackupPro_RestoreController extends CraftController
     public function actionDatabase()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode(\Craft\craft()->request->getParam('id'));
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         
         $file = $storage->getStorage()->getDbBackupNamePath($file_name);

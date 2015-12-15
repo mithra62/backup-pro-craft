@@ -36,7 +36,7 @@ class BackupPro_SettingsController extends CraftController
      */
     public function actionEdit()
     {
-        $section = ( \Craft\craft()->request->getParam('section') != '' ? \Craft\craft()->request->getParam('section') : 'general' );
+        $section = ( $this->platform->getPost('section') != '' ? $this->platform->getPost('section') : 'general' );
         $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
         $variables['form_data']['cron_notify_emails'] = implode("\n", $this->settings['cron_notify_emails']);
         $variables['form_data']['exclude_paths'] = implode("\n", $this->settings['exclude_paths']);

@@ -114,7 +114,7 @@ class BackupPro_BackupController extends CraftController
     
     public function actionConfirm()
     {
-        $type = \Craft\craft()->request->getParam('type');
+        $type = $this->platform->getPost('type');
         $proc_url = false;
         switch($type)
         {

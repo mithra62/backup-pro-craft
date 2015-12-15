@@ -62,7 +62,7 @@ class BackupPro_StorageController extends CraftController
      */
     public function actionNew()
     {
-        $engine = \Craft\craft()->request->getParam('engine');
+        $engine = $this->platform->getPost('engine');
         $variables = array();
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         
@@ -115,7 +115,7 @@ class BackupPro_StorageController extends CraftController
      */
     public function actionEdit()
     {
-        $storage_id = \Craft\craft()->request->getParam('id');
+        $storage_id = $this->platform->getPost('id');
         if( empty($this->settings['storage_details'][$storage_id]) )
         {
             \Craft\craft()->userSession->setFlash('error', $this->services['lang']->__('invalid_storage_id'));
@@ -170,7 +170,7 @@ class BackupPro_StorageController extends CraftController
             $this->redirect('backuppro/settings/storage');
         }
         
-        $storage_id = \Craft\craft()->request->getParam('id');
+        $storage_id = $this->platform->getPost('id');
         if( empty($this->settings['storage_details'][$storage_id]) )
         {
             \Craft\craft()->userSession->setFlash('error', $this->services['lang']->__('invalid_storage_id'));

@@ -6,7 +6,7 @@
 				<ul>
 					{% for section in available_storage_engines %}
 						<li>
-							<a href="{{ url('backuppro/settings/storage/new?engine='~section.short_name) }}">{{ section.name|m62Lang|t }}</a>
+							<a href="{{ url('backuppro/settings/storage/new?engine='~section.short_name) }}"><img src="{{ resourceUrl('backuppro/images/storage/'~section.icon~'.png') }}" class="" title="{{ section.name|m62Lang|t }}" style="height:12px; "> {{ section.name|m62Lang|t }}</a>
 						</li>
 					{% endfor %}
 				</ul>
