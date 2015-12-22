@@ -21,21 +21,59 @@
 	<p>{{ "restore_db_question"|m62Lang|t }}</p>
 	<p class="notice">{{ "action_can_not_be_undone"|m62Lang|t }} {{ "restore_double_speak"|m62Lang|t }}</p>
 	
-	<p>
-		<strong>{{ "taken"|m62Lang|t }}:</strong> {{ backup.created_date|m62DateTime|raw }} <br />
-		<strong>{{ "backup_type"|m62Lang|t }}:</strong> {{ backup.database_backup_type|m62Lang|t }} <br />
-		<strong>{{ "verified"|m62Lang|t }}:</strong> 
+	<table border="0" cellspacing="0" cellpadding="0" class="data "  width="100%" >
+	<thead>
+	<tr>
+		<th></th>
+		<th></th>
+	</tr>
+	</thead>
+	<tbody>
+	{% if backup.note != '' %}
+	<tr>
+		<td colspan="2">{{ backup.note }}</td>
+	</tr>
+	{% endif %}
+	<tr>
+		<td><strong>{{ "taken"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.created_date|m62DateTime|raw }}</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "backup_type"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.database_backup_type|m62Lang|t }}</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "verified"|m62Lang|t }}:</strong></td>
+		<td>
 			{% if backup.verified == '1' %}
 				<span class="">{{ "yes"|m62Lang|t }}</span>
 			{% else %}
 				<span class="notice">{{ "no"|m62Lang|t }}</span>
-			{% endif %} <br />
-		<strong>{{ "time_taken"|m62Lang|t }}:</strong> {{ backup.time_taken|number_format(2, '.', ',') }}s <br />
-		<strong>{{ "max_memory"|m62Lang|t }}:</strong> {{ backup.max_memory|m62FileSize }} <br />
-		<strong>{{ "uncompressed_sql_size"|m62Lang|t }}:</strong> {{ backup.uncompressed_size|m62FileSize }} <br />
-		<strong>{{ "total_tables"|m62Lang|t }}:</strong> {{ backup.item_count }} <br />
-		<strong>{{ "md5_hash"|m62Lang|t }}:</strong> {{ backup.hash }}
-	</p>
+			{% endif %}		
+		</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "time_taken"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.time_taken|number_format(2, '.', ',') }}</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "max_memory"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.max_memory|m62FileSize }}</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "uncompressed_sql_size"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.uncompressed_size|m62FileSize }}</td>
+	</tr>	
+	<tr>
+		<td><strong>{{ "total_tables"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.item_count }}</td>
+	</tr>
+	<tr>
+		<td><strong>{{ "md5_hash"|m62Lang|t }}:</strong></td>
+		<td>{{ backup.hash }}</td>
+	</tr>
+	</tbody>
+	</table>
 	
 	<form name="update_settings" action="{{ url('backuppro/restore/database') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" method="post" accept-charset="UTF-8" />
 	{{ getCsrfInput() }}
