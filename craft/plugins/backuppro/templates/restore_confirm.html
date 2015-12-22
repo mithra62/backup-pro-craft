@@ -54,7 +54,7 @@
 	</tr>
 	<tr>
 		<td><strong>{{ "time_taken"|m62Lang|t }}:</strong></td>
-		<td>{{ backup.time_taken|number_format(2, '.', ',') }}</td>
+		<td>{{ backup.time_taken|m62TimeFormat|raw }}</td>
 	</tr>
 	<tr>
 		<td><strong>{{ "max_memory"|m62Lang|t }}:</strong></td>
@@ -79,7 +79,7 @@
 	{{ getCsrfInput() }}
 
 		<div class="buttons">
-			<input type="submit" value="{{ "restore"|m62Lang|t }}" class="btn submit" >
+			<input type="submit" value="{{ "restore_db"|m62Lang|t }}" class="btn submit" >
 		</div>
 	</form>
 	
