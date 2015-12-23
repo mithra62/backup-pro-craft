@@ -18,6 +18,7 @@
 	
 	<h2>{{ "restore_db"|m62Lang|t }}</h2>
 	
+	<div id="_restore_details_table">
 	<p>{{ "restore_db_question"|m62Lang|t }}</p>
 	<p class="notice">{{ "action_can_not_be_undone"|m62Lang|t }} {{ "restore_double_speak"|m62Lang|t }}</p>
 	
@@ -74,12 +75,21 @@
 	</tr>
 	</tbody>
 	</table>
+	</div>
+	
+	<div id="restore_running_details"  style="display:none" >
+		<div id="backup_instructions">
+		  {{ "restore_in_progress_instructions"|m62Lang|t|raw }}
+		</div>			
+		<br />{{ "restore_in_progress"|m62Lang|t|raw }}
+		<img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_image" />
+	</div>		
 	
 	<form name="update_settings" action="{{ url('backuppro/restore/database') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" method="post" accept-charset="UTF-8" />
 	{{ getCsrfInput() }}
 
 		<div class="buttons">
-			<input type="submit" value="{{ "restore_db"|m62Lang|t }}" class="btn submit" >
+			<input type="submit" value="{{ "restore_db"|m62Lang|t }}" class="btn submit" id="_restore_direct" >
 		</div>
 	</form>
 	
