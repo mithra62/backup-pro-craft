@@ -36,7 +36,7 @@
 	{% if enable_delete is defined and enable_delete == 'yes' %}
 	<td>
 		{{ forms.checkbox({
-		        id: backup.hash,
+		        id: 'backup_check_'~loop.index0,
 		        name: 'backups[]',
 		        value: backup.file_name|m62Encode|url_encode,
 		        class: 'toggle_files'

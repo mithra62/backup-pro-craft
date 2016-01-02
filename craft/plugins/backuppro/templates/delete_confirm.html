@@ -23,7 +23,7 @@
 		{% include 'backuppro/_includes/_backup_table' with {'enable_type': 'yes', '_backups': backups, '_enable_delete':'no' } %}
 	
 		<div class="buttons right">
-			<input type="submit" value="{{ "delete"|m62Lang|t }}" class="btn submit" >
+			<input type="submit" value="{{ "delete"|m62Lang|t }}" class="btn submit" name="_remove_backup_button" id="_remove_backup_button">
 		</div>
 		
 	</form>	
