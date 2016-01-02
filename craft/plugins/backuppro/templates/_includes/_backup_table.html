@@ -74,7 +74,7 @@
 		<div style="float:right">
 		{% if backup.backup_type == 'database' %}
 			{% if backup.can_restore == '1' %}
-			<a href="{{ url('backuppro/restore/confirm') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" title="{{ "restore"|m62Lang }}">
+			<a href="{{ url('backuppro/restore/confirm') }}?id={{ backup.details_file_name|m62Encode|url_encode }}" title="{{ "restore"|m62Lang }}" id="restore_link_{{ loop.index0 }}">
 				<img src="{{ resourceUrl('backuppro/images/restore.png') }}" alt="{{ "restore"|m62Lang }}" class="">
 			</a> 
 			{% else %}
@@ -83,7 +83,7 @@
 			
 		{% endif %}
 		{% if backup.can_download == '1' %}
-		<a href="{{ url('backuppro/download') }}?id={{ backup.details_file_name|m62Encode|url_encode }}&type={{ backup.backup_type }}" title="{{ "download"|m62Lang }}">
+		<a href="{{ url('backuppro/download') }}?id={{ backup.details_file_name|m62Encode|url_encode }}&type={{ backup.backup_type }}" title="{{ "download"|m62Lang }}" id="download_link_{{ loop.index0 }}">
 			<img src="{{ resourceUrl('backuppro/images/download.png') }}" alt="{{ "download"|m62Lang }}" class="">
 		</a> 
 		{% else %}
