@@ -70,7 +70,9 @@ class BackupPro_RestoreController extends CraftController
         if($restore_file_path && file_exists($restore_file_path))
         {
             $db_info = $this->platform->getDbCredentials();
-            if( $this->services['restore']->setDbInfo($db_info)->setBackupInfo($backup_info)->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell']) )
+            $options = $this->settings;
+            $options['file_name'] = $restore_file_path;
+            if( $this->services['restore']->setDbInfo($db_info)->setBackupInfo($backup_info)->database($db_info['database'], $options, $this->services['shell']) )
             {
                 \Craft\craft()->userSession->setFlash('notice', $this->services['lang']->__('database_restored'));
                 $this->redirect('backuppro/database_backups');
