@@ -16,7 +16,7 @@ require_once 'vendor/autoload.php';
 use Craft\DbCommand;
 use mithra62\BackupPro\Platforms\Craft AS Platform;
 use mithra62\BackupPro\BackupPro;
-use mithra62\Twig\m62LangTwigExtension;
+use mithra62\Platforms\View\m62TwigExtension;
 use mithra62\BackupPro\Traits\Controller;
 use mithra62\Exceptions\PlatformsException;
 
@@ -157,7 +157,7 @@ class BackupProPlugin extends BasePlugin implements BackupPro
     public function addTwigExtension()
     {
         Craft::import('plugins.backuppro.mithra62.Twig.m62LangTwigExtension');
-        $plugin = new m62LangTwigExtension($this->services['lang'], $this->services['files'], $this->services['settings'], $this->services['encrypt'], $this->platform);
+        $plugin = new m62TwigExtension($this->services['lang'], $this->services['files'], $this->services['settings'], $this->services['encrypt'], $this->platform);
         return $plugin;
     } 
     

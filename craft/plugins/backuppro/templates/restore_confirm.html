@@ -59,11 +59,11 @@
 	</tr>
 	<tr>
 		<td><strong>{{ "max_memory"|m62Lang|t }}:</strong></td>
-		<td>{{ backup.max_memory|m62FileSize }}</td>
+		<td>{{ backup.max_memory|m62FileSize|raw }}</td>
 	</tr>
 	<tr>
 		<td><strong>{{ "uncompressed_sql_size"|m62Lang|t }}:</strong></td>
-		<td>{{ backup.uncompressed_size|m62FileSize }}</td>
+		<td>{{ backup.uncompressed_size|m62FileSize|raw }}</td>
 	</tr>	
 	<tr>
 		<td><strong>{{ "total_tables"|m62Lang|t }}:</strong></td>

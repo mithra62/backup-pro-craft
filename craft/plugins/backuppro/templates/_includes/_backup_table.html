@@ -66,9 +66,9 @@
 	{% if enable_type is defined and enable_type == 'yes' %}
 	<td>{{ backup.backup_type|m62Lang }}</td>
 	{% endif %}
-	<td style="white-space: nowrap"><!-- {{ backup.compressed_size }} -->{{ backup.compressed_size|m62FileSize }}</td>
+	<td style="white-space: nowrap"><!-- {{ backup.compressed_size }} -->{{ backup.compressed_size|m62FileSize|raw }}</td>
 	<td style="white-space: nowrap">{{ backup.time_taken|m62TimeFormat|raw }}</td>
-	<td style="white-space: nowrap">{{ backup.max_memory|m62FileSize }}</td>
+	<td style="white-space: nowrap">{{ backup.max_memory|m62FileSize|raw }}</td>
 	{% if enable_actions is defined and enable_actions == 'yes' %}
 	<td align="right" style="width:40px; white-space: nowrap">
 		<div style="float:right">
