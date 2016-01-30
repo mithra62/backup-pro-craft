@@ -46,7 +46,7 @@
         name: 'cron_notify_email_mailtype',
         value: form_data.cron_notify_email_mailtype,
         instructions: "cron_notify_email_mailtype_instructions"|m62Lang|t,
-        options: { html:"html"|m62Lang|t, text:"text"|m62Lang|t },
+        options: "email_type"|m62Options,
         errors: form_errors.cron_notify_email_mailtype
     }) 
 }}

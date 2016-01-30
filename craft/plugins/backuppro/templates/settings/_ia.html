@@ -90,7 +90,7 @@
         name: 'backup_missed_schedule_notify_email_mailtype',
         value: form_data.backup_missed_schedule_notify_email_mailtype,
         instructions: "backup_missed_schedule_notify_email_mailtype_instructions"|m62Lang|t,
-        options: { html:"html"|m62Lang|t, text:"text"|m62Lang|t },
+        options: "email_type"|m62Options,
         errors: form_errors.backup_missed_schedule_notify_email_mailtype
     }) 
 }}
