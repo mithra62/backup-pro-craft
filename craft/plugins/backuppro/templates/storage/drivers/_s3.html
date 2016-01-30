@@ -28,6 +28,17 @@
     }) 
 }}
 
+{{ forms.selectField({
+        label: "s3_region"|m62Lang|t,
+        id: 's3_region',
+        name: 's3_region',
+        value: form_data.s3_region,
+        instructions: "s3_region_instructions"|m62Lang|t,
+        options: 's3_regions'|m62Options(false),
+        errors: form_errors.s3_region
+    }) 
+}}
+
 <hr />
 {{ forms.textField({
         label: "s3_optional_prefix"|m62Lang|t,

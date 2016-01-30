@@ -16,7 +16,7 @@ require_once 'vendor/autoload.php';
 use Craft\DbCommand;
 use mithra62\BackupPro\Platforms\Craft AS Platform;
 use mithra62\BackupPro\BackupPro;
-use mithra62\Platforms\View\m62TwigExtension;
+use mithra62\BackupPro\Platforms\View\m62TwigExtension;
 use mithra62\BackupPro\Traits\Controller;
 use mithra62\Exceptions\PlatformsException;
 
