@@ -128,14 +128,6 @@ class BackupProPlugin extends BasePlugin implements BackupPro
         return 'mithra62';
     }
     
-    /**
-     * Returns the icon path
-     */
-    public function getIconPath()
-    {
-        return craft()->path->getPluginsPath().'myplugin/resources/icon.svg';
-    }
-    
     public function getDocumentationUrl()
     {
         return 'https://mithra62.com/docs/table-of-contents/backup-pro';
