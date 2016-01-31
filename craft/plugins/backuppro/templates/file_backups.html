@@ -50,7 +50,7 @@
 	<h3>{{ "file_backups"|m62Lang|t }} ( {{ backups.files|length }} )</h3>
 	
 	{% if backups.files|length == '0' %}
-		{{ "no_file_backups"|m62Lang|t }} <a href="{{ url('backuppro/backup/files') }}">{{ "would_you_like_to_backup_files_now"|m62Lang|t }}</a>
+		{{ "no_file_backups"|m62Lang|t }} <a href="{{ url('backuppro/backup?type=files') }}">{{ "would_you_like_to_backup_files_now"|m62Lang|t }}</a>
 	{% else %}
 	
 		
