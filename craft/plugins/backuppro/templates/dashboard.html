@@ -120,7 +120,7 @@
 	<h3>{{ "recent_backups"|m62Lang|t }} ( {{ backups|length }} )</h3>
 	
 	{% if backups|length == '0' %}
-		{{ "no_backups_exist"|m62Lang|t }} <a href="{{ url('backuppro/backup/db') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
+		{{ "no_backups_exist"|m62Lang|t }} <a href="{{ url('backuppro/backup?type=database') }}">{{ "would_you_like_to_backup_database_now"|m62Lang|t }}</a>
 	{% else %}
 		{% include 'backuppro/_includes/_backup_table' with {'enable_type': 'yes', '_backups': backups, 'enable_delete':'no', 'enable_editable_note':'yes', 'enable_actions':'yes' } %}
 	{% endif %}
