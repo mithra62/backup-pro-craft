@@ -214,6 +214,9 @@ class BackupProPlugin extends BasePlugin implements BackupPro
             //automation
             'backuppro\/cron\/backup' => array('action' => 'backupPro/cron/backup'),
             'backuppro\/cron\/ia' => array('action' => 'backupPro/cron/integrityAgent'),
+            
+            //rest api
+            'backuppro\/api' => array('action' => 'backupPro/rest/api'),
 
             //restoration
             'backuppro\/restore\/database' => array('action' => 'backupPro/restore/database'),
