@@ -79,6 +79,7 @@ class BackupPro_SettingsController extends CraftController
         $variables['errors'] = $this->errors;
         $variables['threshold_options'] = $this->services['settings']->getAutoPruneThresholdOptions();
         $variables['available_db_backup_engines'] = $this->services['backup']->getDataBase()->getAvailableEnginesOptions();
+        $variables['rest_api_route_entry'] = $this->platform->getRestApiRouteEntry($this->settings);
         $this->renderTemplate('backuppro/settings', $variables);      
     }    
 }

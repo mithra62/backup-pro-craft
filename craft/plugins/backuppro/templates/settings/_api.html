@@ -1,0 +1,42 @@
+<h2>{{ "rest_api_details"|m62Lang|t }}</h2>
+<p>{{ 'rest_api_instructions'|m62Lang|t }}</p>
+<p>{{ 'rest_api_route_entry'|m62Lang|t }}: 
+<a href="{{ rest_api_route_entry }}" target="_blank">{{ rest_api_route_entry }}</a>
+</p>
+
+{{ forms.checkboxField({
+        label: "enable_rest_api"|m62Lang|t,
+        id: 'enable_rest_api',
+        name: 'enable_rest_api',
+        value: 1,
+        instructions: "enable_rest_api_instructions"|m62Lang|t,
+        checked: form_data.enable_rest_api,
+        errors: form_errors.enable_rest_api
+    }) 
+}}
+
+<div id="rest_api_wrap" style="display:none; ">
+<h2>{{ "rest_api_credentials"|m62Lang|t }}</h2>
+<p>{{ 'rest_api_credentials_instructions'|m62Lang|t }}</p>
+
+{{ forms.textField({
+        label: "api_key"|m62Lang|t,
+        id: 'api_key',
+        name: 'api_key',
+        value: form_data.api_key,
+        instructions: "api_key_instructions"|m62Lang|t,
+        errors: form_errors.api_key
+    }) 
+}}
+
+{{ forms.textField({
+        label: "api_secret"|m62Lang|t,
+        id: 'api_secret',
+        name: 'api_secret',
+        value: form_data.api_secret,
+        instructions: "api_secret_instructions"|m62Lang|t,
+        errors: form_errors.api_secret
+    }) 
+}}
+
+</div>
