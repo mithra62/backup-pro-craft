@@ -159,7 +159,7 @@ class BackupProPlugin extends BasePlugin implements BackupPro
      */
     public function getSettingsUrl()
     {
-        return UrlHelper::getUrl('/admin/backuppro');
+        return 'backuppro';
     }  
     
     /**
