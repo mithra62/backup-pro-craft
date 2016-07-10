@@ -7,7 +7,7 @@
 	<property name="main_files" value="craft" />
 	<property name="cms_root_path" value="${build_container_dir}/craft" /> 
 	<property name="vendor_path" value="${cms_root_path}/plugins/backuppro/vendor" />
-	<property name="backup_pro_logic_base" value="${cms_root_path}/plugins/backuppro/mithra62/BackupPro" />
+	<property name="backup_pro_logic_base" value="${cms_root_path}/plugins/backuppro/mithra62" />
 	<property name="jaeger_base" value="${cms_root_path}/plugins/backuppro/mithra62" />
 		
 	<property name="platform_theme_base" value="${build_container_dir}/craft/plugins/backuppro/resources" />		
