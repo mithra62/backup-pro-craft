@@ -12,7 +12,7 @@ namespace Craft;
 
 use mithra62\BackupPro\Platforms\Controllers\Craft AS CraftController;
 use mithra62\BackupPro\Exceptions\BackupException;
-use mithra62\Traits\Log;
+use JaegerApp\Traits\Log;
 
 /**
  * Craft - Backup Pro Cron Controller
