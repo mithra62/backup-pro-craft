@@ -12,11 +12,11 @@
 <tr class="even">
 	<td width='50%' style="width:50%;">{{ key|m62Lang|t }}</td>
 	<td style="width:50%;">
-		<div class="select_all">{{ cron.cmd }}</div>
+		<div class="select_all" id="cron_cmd_{{ key }}">{{ cron.cmd }}</div>
 	</td>
 	<td style="width:50%;">
 		{% if cron.type == 'curl' %}
-		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}">
+		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}" id="cron_url_{{ key }}">
 			<img src="{{ resourceUrl('backuppro/images/test.png') }}" />
 		</a> <img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_{{ key }}" style="display:none" />
 		
