@@ -16,7 +16,7 @@
 	</td>
 	<td style="width:50%;">
 		{% if cron.type == 'curl' %}
-		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}">
+		<a href="{{ cron.url }}" class="test_cron" rel="{{ key }}" id="integrity_cmd_{{ key }}">>
 			<img src="{{ resourceUrl('backuppro/images/test.png') }}" />
 		</a> <img src="{{ resourceUrl('backuppro/images/indicator.gif') }}" id="animated_{{ key }}" style="display:none" />
 		

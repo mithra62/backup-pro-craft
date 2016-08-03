@@ -1,7 +1,7 @@
 <h2>{{ "rest_api_details"|m62Lang|t }}</h2>
 <p>{{ 'rest_api_instructions'|m62Lang|t }}</p>
 <p>{{ 'rest_api_route_entry'|m62Lang|t }}: 
-<a href="{{ rest_api_route_entry }}" target="_blank">{{ rest_api_route_entry }}</a>
+<a href="{{ rest_api_route_entry }}" target="_blank" id="rest_api_url_wrap">{{ rest_api_route_entry }}</a>
 </p>
 
 {{ forms.checkboxField({
